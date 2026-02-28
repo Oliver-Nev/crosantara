@@ -203,6 +203,16 @@
                             <i data-lucide="percent" class="w-5 h-5"></i> Coba Diskon
                         </button>
                     </div>
+
+                    <!-- Voucher Wallet Section (Tampil Jika Punya Voucher Aktif) -->
+                    <div id="voucher-wallet" class="hidden mt-6 pt-6 border-t border-brand-brown/10 text-left">
+                        <p class="text-xs font-bold uppercase tracking-widest text-brand-terracotta mb-3 flex items-center gap-2 justify-center lg:justify-start">
+                            <i data-lucide="wallet" class="w-4 h-4"></i> Dompet Voucher Anda
+                        </p>
+                        <div id="voucher-list" class="flex flex-wrap gap-3 justify-center lg:justify-start">
+                            <!-- Vouchers disuntikkan oleh JS -->
+                        </div>
+                    </div>
                 </div>
                 
                 <div class="relative group perspective-1000 mt-8 lg:mt-0">
@@ -265,12 +275,22 @@
                             <!-- Made -->
                             <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-brand-brown border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
                                 <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Made</p><p class="text-[10px] text-brand-terracotta uppercase tracking-wider">Manis Gede</p></div>
-                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 28.000</span><button onclick="addToCart('Klepon Made', 28000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                                <!-- UBAH HARGA DI SINI (Klepon Made): 
+                                     1. Ganti tulisan 'Rp 28.000' untuk mengubah tampilan yang dilihat pengunjung.
+                                     2. Ganti angka '28000' di dalam addToCart(...) untuk mengubah harga asli saat dihitung di keranjang. -->
+                                <div class="flex items-center gap-4">
+                                    <span class="font-bold text-brand-dark">Rp 28.000</span>
+                                    <button onclick="addToCart('Klepon Made', 28000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full z-10 bg-white"><i data-lucide="plus" class="w-5 h-5"></i></button>
+                                </div>
                             </div>
                             <!-- Macil -->
                             <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-stone-300 border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
                                 <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Macil</p><p class="text-[10px] text-stone-500 uppercase tracking-wider">Manis Kecil</p></div>
-                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 12.000</span><button onclick="addToCart('Klepon Macil', 12000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                                <!-- UBAH HARGA DI SINI (Klepon Macil): -->
+                                <div class="flex items-center gap-4">
+                                    <span class="font-bold text-brand-dark">Rp 12.000</span>
+                                    <button onclick="addToCart('Klepon Macil', 12000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full z-10 bg-white"><i data-lucide="plus" class="w-5 h-5"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -301,12 +321,20 @@
                             <!-- Ade -->
                             <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-brand-brown border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
                                 <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Ade</p><p class="text-[10px] text-brand-terracotta uppercase tracking-wider">Asin Gede</p></div>
-                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 32.000</span><button onclick="addToCart('Rica Ade', 32000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                                <!-- UBAH HARGA DI SINI (Rica Ade): -->
+                                <div class="flex items-center gap-4">
+                                    <span class="font-bold text-brand-dark">Rp 32.000</span>
+                                    <button onclick="addToCart('Rica Ade', 32000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full z-10 bg-white"><i data-lucide="plus" class="w-5 h-5"></i></button>
+                                </div>
                             </div>
                             <!-- Acil -->
                             <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-stone-300 border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
                                 <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Acil</p><p class="text-[10px] text-stone-500 uppercase tracking-wider">Asin Kecil</p></div>
-                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 15.000</span><button onclick="addToCart('Rica Acil', 15000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                                <!-- UBAH HARGA DI SINI (Rica Acil): -->
+                                <div class="flex items-center gap-4">
+                                    <span class="font-bold text-brand-dark">Rp 15.000</span>
+                                    <button onclick="addToCart('Rica Acil', 15000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full z-10 bg-white"><i data-lucide="plus" class="w-5 h-5"></i></button>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -354,7 +382,7 @@
                     <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Luar Biasa!</h3>
                     <p class="text-stone-600 mb-8 text-sm">Jawaban benar semua.</p>
                     <div class="bg-brand-brown p-1 rounded-lg mb-8 shadow-inner">
-                        <div class="bg-brand-cream border border-brand-brown/30 p-4 rounded relative group cursor-pointer hover:bg-white transition" onclick="copyCode()">
+                        <div class="bg-brand-cream border border-brand-brown/30 p-4 rounded relative group cursor-pointer hover:bg-white transition" onclick="copyCodeFromDisplay()">
                             <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-1">Kode Voucher Anda</p>
                             <!-- ID ini ditambahkan agar text kodenya bisa diubah menggunakan JS -->
                             <p id="won-voucher-display" class="text-3xl font-mono font-bold text-brand-brown tracking-wider">NUSANTARA50</p>
@@ -363,7 +391,9 @@
                             </div>
                         </div>
                     </div>
-                    <button onclick="closeQuizAndShop()" class="w-full py-3 bg-brand-terracotta text-white font-bold hover:bg-brand-brown transition shadow-lg uppercase tracking-wider text-sm">Gunakan Sekarang</button>
+                    <button onclick="closeQuizAndShop()" class="w-full py-3 bg-brand-terracotta text-white font-bold hover:bg-brand-brown transition shadow-lg uppercase tracking-wider text-sm">Pesan Sekarang</button>
+                    <!-- Tombol Gunakan Nanti -->
+                    <button onclick="closeQuiz()" class="w-full mt-3 py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition shadow-md uppercase tracking-wider text-sm">Simpan & Gunakan Nanti</button>
                 </div>
 
                 <div id="quiz-fail" class="hidden text-center relative z-10">
@@ -386,6 +416,18 @@
             </div>
             <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
             <div class="p-6 border-t border-brand-brown/10 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                
+                <!-- PENGINGAT VOUCHER DI KERANJANG -->
+                <div id="cart-voucher-reminder" class="hidden mb-4 p-3 bg-brand-gold/10 border border-brand-gold/30 rounded text-sm text-brand-dark flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="ticket" class="w-4 h-4 text-brand-gold"></i>
+                        <span class="font-medium text-xs">Anda punya voucher yang bisa dipakai:</span>
+                    </div>
+                    <div id="cart-available-vouchers" class="flex gap-2 flex-wrap">
+                        <!-- Voucher disuntikkan dari JS -->
+                    </div>
+                </div>
+
                 <div class="mb-6"><div class="flex gap-2"><input type="text" id="discount-code" placeholder="Kode Voucher" class="flex-1 border-2 border-stone-200 bg-stone-50 rounded-none px-4 py-2 text-sm focus:outline-none focus:border-brand-brown uppercase font-mono tracking-wider transition"><button onclick="applyDiscount()" class="bg-brand-dark text-white px-6 py-2 text-sm font-bold hover:bg-brand-brown transition uppercase tracking-wide">Pakai</button></div><p id="discount-msg" class="text-xs mt-2 hidden flex items-center gap-1"></p></div>
                 <div class="space-y-3 mb-6 font-serif"><div class="flex justify-between text-stone-600 text-sm"><span>Subtotal</span><span id="cart-subtotal" class="font-sans font-medium">Rp 0</span></div><div class="flex justify-between text-brand-terracotta hidden" id="discount-row"><span>Potongan (50%)</span><span id="discount-amount" class="font-sans font-medium">-Rp 0</span></div><div class="flex justify-between text-2xl font-bold text-brand-dark pt-4 border-t border-brand-brown/10"><span>Total</span><span id="cart-total" class="font-sans">Rp 0</span></div></div>
                 <button onclick="checkout()" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition flex justify-center items-center gap-3 shadow-lg group"><span>Proses Pesanan (WA)</span><i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i></button>
@@ -417,7 +459,16 @@
             <h2 class="font-serif text-3xl font-bold text-brand-cream mb-2">Crosantara.</h2>
             <div class="flex items-center gap-4 mb-8"><div class="h-[1px] w-12 bg-brand-gold/30"></div><p class="text-xs uppercase tracking-[0.3em] text-brand-gold">Est. 2026</p><div class="h-[1px] w-12 bg-brand-gold/30"></div></div>
             <p class="text-sm max-w-md mx-auto mb-10 leading-relaxed font-light">"Mengangkat cita rasa lokal ke panggung dunia, satu lipatan pastry pada satu waktu."</p>
-            <div class="flex gap-8 text-sm font-medium tracking-wide"><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Instagram</a><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">WhatsApp</a><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Lokasi</a></div>
+            
+            <div class="flex gap-6 sm:gap-8 text-sm font-medium tracking-wide">
+                <!-- UBAH LINK SOSIAL MEDIA DI SINI -->
+                <!-- Cukup ganti teks di dalam href="" dengan link tujuan yang kamu inginkan -->
+                <a href="LINK_INSTAGRAM_DISINI" target="_blank" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Instagram</a>
+                <a href="LINK_TIKTOK_DISINI" target="_blank" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">TikTok</a>
+                <a href="LINK_WHATSAPP_DISINI" target="_blank" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">WhatsApp</a>
+                <a href="LINK_MAPS_DISINI" target="_blank" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Lokasi</a>
+            </div>
+            
             <p class="text-[10px] text-brand-cream/30 mt-12">&copy; 2026 Crosantara Indonesia. Dibuat dengan cinta dan tepung.</p>
         </div>
         <div class="h-3 w-full pattern-batik-cap absolute bottom-0 left-0"></div>
@@ -759,6 +810,9 @@
 
                 document.getElementById('quiz-success').classList.remove('hidden');
                 confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#D4AF37', '#5D4037', '#ffffff'] });
+                
+                // Refresh dompet voucher
+                renderVouchers();
             } else {
                 document.getElementById('quiz-fail').classList.remove('hidden');
             }
@@ -790,14 +844,78 @@
             setTimeout(() => { modal.classList.add('hidden'); document.getElementById('quiz-form').reset(); }, 300);
         }
 
+        // --- DOMPET VOUCHER ---
+        function renderVouchers() {
+            const wallet = document.getElementById('voucher-wallet');
+            const list = document.getElementById('voucher-list');
+            if (!wallet || !list) return;
+
+            let ownedVouchers = JSON.parse(localStorage.getItem('crosantara_vouchers') || '[]');
+            let activeVouchers = ownedVouchers.filter(v => !v.used);
+
+            if (activeVouchers.length > 0) {
+                wallet.classList.remove('hidden');
+                list.innerHTML = activeVouchers.map(v => `
+                    <div onclick="copySpecificCode('${v.code}')" class="relative group cursor-pointer flex items-center gap-2 bg-brand-cream border border-brand-gold/40 px-3 py-1.5 rounded-lg shadow-sm hover:shadow-md hover:border-brand-brown transition">
+                        <i data-lucide="ticket" class="w-4 h-4 text-brand-gold"></i>
+                        <span class="font-mono font-bold text-brand-dark text-sm">${v.code}</span>
+                        <div class="absolute -top-8 left-1/2 transform -translate-x-1/2 bg-brand-dark text-white text-[10px] px-2 py-1 rounded opacity-0 group-hover:opacity-100 transition whitespace-nowrap pointer-events-none">Klik untuk Salin</div>
+                    </div>
+                `).join('');
+                lucide.createIcons();
+            } else {
+                wallet.classList.add('hidden');
+            }
+
+            updateCartReminder();
+        }
+
+        function copySpecificCode(code) {
+            navigator.clipboard.writeText(code);
+            alert("Kode voucher disalin: " + code);
+            
+            // Auto isi ke keranjang jika keranjang tidak tersembunyi
+            const discountInput = document.getElementById('discount-code');
+            if (discountInput) {
+                discountInput.value = code;
+            }
+        }
+
+        function updateCartReminder() {
+            const reminderBox = document.getElementById('cart-voucher-reminder');
+            const vouchersContainer = document.getElementById('cart-available-vouchers');
+            if(!reminderBox || !vouchersContainer) return;
+
+            let ownedVouchers = JSON.parse(localStorage.getItem('crosantara_vouchers') || '[]');
+            let activeVouchers = ownedVouchers.filter(v => !v.used);
+
+            if (activeVouchers.length > 0 && !isDiscountApplied) {
+                reminderBox.classList.remove('hidden');
+                vouchersContainer.innerHTML = activeVouchers.map(v => 
+                    `<button onclick="autoFillVoucher('${v.code}')" class="bg-white border border-brand-brown/30 px-3 py-1.5 rounded shadow-sm text-xs font-bold font-mono text-brand-brown hover:bg-brand-brown hover:text-white transition">Pakai: ${v.code}</button>`
+                ).join('');
+            } else {
+                reminderBox.classList.add('hidden');
+            }
+        }
+
+        function autoFillVoucher(code) {
+            document.getElementById('discount-code').value = code;
+            applyDiscount();
+        }
+
         // --- CART & SYSTEM ---
         let cart = [];
         let isDiscountApplied = false;
         let appliedVoucherCode = null; // Menyimpan kode mana yang sedang aktif di cart
 
         function addToCart(name, price, image) {
-            const existingItem = cart.find(item => item.name === name);
-            if (existingItem) existingItem.qty++; else cart.push({ name, price, image, qty: 1 });
+            const existingItem = cart.find(item => item.name === name && item.price === price);
+            if (existingItem) {
+                existingItem.qty++; 
+            } else {
+                cart.push({ name, price, image, qty: 1 });
+            }
             updateCartUI();
             showToast();
         }
@@ -838,6 +956,7 @@
             
             lucide.createIcons();
             updateCartUI();
+            updateCartReminder(); // Perbarui reminder jika diskon sukses diterapkan
         }
 
         function resetDiscount() {
@@ -845,6 +964,7 @@
             appliedVoucherCode = null;
             document.getElementById('discount-code').value = '';
             document.getElementById('discount-msg').classList.add('hidden');
+            updateCartReminder();
         }
 
         function updateCartUI() {
@@ -905,7 +1025,7 @@
         function checkout() {
             if (cart.length === 0) return;
             let message = "Salam Crosantara! Saya ingin memesan:\n\n";
-            cart.forEach(item => message += `• ${item.name} (${item.qty}x)\n`);
+            cart.forEach(item => message += `• ${item.name} (${item.qty}x) = Rp ${(item.price * item.qty).toLocaleString('id-ID')}\n`);
             
             const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
             
@@ -933,9 +1053,10 @@
             resetDiscount();
             updateCartUI();
             toggleCart(); // Tutup panel
+            renderVouchers(); // Refresh dompet UI (menghilangkan yang terpakai)
         }
 
-        function copyCode() {
+        function copyCodeFromDisplay() {
             const codeToCopy = document.getElementById('won-voucher-display').innerText;
             navigator.clipboard.writeText(codeToCopy);
             alert("Kode voucher disalin: " + codeToCopy);
@@ -952,6 +1073,7 @@
             if (sidebar.classList.contains('hidden')) {
                 sidebar.classList.remove('hidden');
                 setTimeout(() => panel.classList.remove('translate-x-full'), 10);
+                updateCartReminder(); // Cek voucher pas keranjang dibuka
             } else {
                 panel.classList.add('translate-x-full');
                 setTimeout(() => sidebar.classList.add('hidden'), 300);
@@ -963,6 +1085,9 @@
             toast.classList.remove('translate-y-48');
             setTimeout(() => toast.classList.add('translate-y-48'), 3000);
         }
+
+        // Tampilkan voucher tersimpan saat halaman dimuat
+        renderVouchers();
 
         lucide.createIcons();
         window.addEventListener('scroll', () => {
