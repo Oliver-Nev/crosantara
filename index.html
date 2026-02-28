@@ -1,0 +1,980 @@
+<!DOCTYPE html>
+<html lang="id" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Crosantara | Warisan Rasa Nusantara</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+
+    <!-- Confetti -->
+    <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'brand-brown': '#5D4037', // Coklat Kayu
+                        'brand-gold': '#D4AF37',  // Emas Murni
+                        'brand-cream': '#FDFBF7', // Krem Halus
+                        'brand-dark': '#2D1B18',  // Coklat Kopi
+                        'brand-terracotta': '#A0522D', // Merah Bata
+                        'klepon-green': '#4A7c59',
+                        'rica-red': '#C62828',
+                    },
+                    fontFamily: {
+                        serif: ['"Playfair Display"', 'serif'],
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                    },
+                    backgroundImage: {
+                        'batik-subtle': "url('https://www.transparenttextures.com/patterns/batik.png')", 
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body { 
+            background-color: #FDFBF7; 
+            background-image: url('https://www.transparenttextures.com/patterns/clean-textile.png');
+            overflow-x: hidden; /* Fix tampilan terpotong/scroll samping */
+        }
+        
+        /* Motif Batik Cap */
+        .pattern-batik-cap {
+            background-color: #5D4037;
+            background-image: 
+                radial-gradient(circle at 50% 50%, transparent 6px, #D4AF37 7px, #D4AF37 8px, transparent 9px),
+                radial-gradient(circle at 0% 0%, transparent 12px, #4e342e 13px, #4e342e 14px, transparent 15px),
+                radial-gradient(circle at 100% 100%, transparent 12px, #4e342e 13px, #4e342e 14px, transparent 15px),
+                linear-gradient(45deg, transparent 48%, #3E2723 48%, #3E2723 52%, transparent 52%),
+                linear-gradient(-45deg, transparent 48%, #3E2723 48%, #3E2723 52%, transparent 52%);
+            background-size: 30px 30px;
+            background-blend-mode: soft-light;
+        }
+
+        /* Motif Kawung */
+        .pattern-kawung {
+            background-image: 
+                radial-gradient(circle at 100% 50%, transparent 20%, rgba(93, 64, 55, 0.08) 21%, rgba(93, 64, 55, 0.08) 34%, transparent 35%, transparent),
+                radial-gradient(circle at 0% 50%, transparent 20%, rgba(93, 64, 55, 0.08) 21%, rgba(93, 64, 55, 0.08) 34%, transparent 35%, transparent);
+            background-size: 60px 60px;
+        }
+
+        /* Decorative Corners */
+        .corner-motif {
+            position: absolute;
+            width: 30px;
+            height: 30px;
+            border: 2px solid #D4AF37;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 20;
+            opacity: 0.6;
+        }
+        .corner-tl { top: 12px; left: 12px; border-right: none; border-bottom: none; border-top-left-radius: 8px; }
+        .corner-tr { top: 12px; right: 12px; border-left: none; border-bottom: none; border-top-right-radius: 8px; }
+        .corner-bl { bottom: 12px; left: 12px; border-right: none; border-top: none; border-bottom-left-radius: 8px; }
+        .corner-br { bottom: 12px; right: 12px; border-left: none; border-top: none; border-bottom-right-radius: 8px; }
+
+        .group:hover .corner-motif { opacity: 1; border-color: #A0522D; border-width: 3px; }
+        .group:hover .corner-tl { transform: translate(-4px, -4px); }
+        .group:hover .corner-tr { transform: translate(4px, -4px); }
+        .group:hover .corner-bl { transform: translate(-4px, 4px); }
+        .group:hover .corner-br { transform: translate(4px, 4px); }
+
+        .hide-scroll::-webkit-scrollbar { display: none; }
+        .text-shadow-sm { text-shadow: 1px 1px 2px rgba(0,0,0,0.1); }
+    </style>
+</head>
+<body class="font-sans text-stone-800 antialiased selection:bg-brand-brown selection:text-brand-gold pb-24">
+
+    <!-- Top Pattern Strip -->
+    <div class="h-3 w-full pattern-batik-cap fixed top-0 z-50 shadow-md border-b border-brand-gold/50"></div>
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-40 top-3 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-lg border-b border-brand-brown/10" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16 md:h-20">
+                <!-- Logo -->
+                <a href="#" class="flex items-center gap-3 group">
+                    <div class="relative p-2 bg-brand-cream rounded-lg border border-brand-gold/30">
+                        <i data-lucide="croissant" class="h-6 w-6 md:h-7 md:w-7 text-brand-brown transform group-hover:rotate-12 transition"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <span class="font-serif text-xl md:text-2xl font-bold text-brand-dark tracking-wide leading-none">Crosantara<span class="text-brand-gold">.</span></span>
+                        <span class="text-[9px] md:text-[10px] uppercase tracking-[0.2em] text-brand-terracotta font-medium">Est. 2026</span>
+                    </div>
+                </a>
+
+                <!-- Desktop Menu -->
+                <div class="hidden md:flex space-x-8 items-center">
+                    <a href="#home" class="text-stone-600 hover:text-brand-brown font-medium transition relative group">
+                        Beranda
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all group-hover:w-full"></span>
+                    </a>
+                    <a href="#menu" class="text-stone-600 hover:text-brand-brown font-medium transition relative group">
+                        Menu Spesial
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all group-hover:w-full"></span>
+                    </a>
+                    
+                    <button onclick="checkAndOpenQuiz()" class="px-5 py-2.5 bg-brand-brown text-white border border-brand-brown rounded-none rounded-tr-xl rounded-bl-xl hover:bg-brand-dark hover:shadow-lg transition flex items-center gap-2 group relative overflow-hidden">
+                        <span class="absolute inset-0 pattern-batik-cap opacity-20 translate-y-full group-hover:translate-y-0 transition-transform duration-500"></span>
+                        <i data-lucide="brain-circuit" class="w-4 h-4 relative z-10"></i>
+                        <span class="relative z-10 font-medium">Tantangan Diskon</span>
+                    </button>
+
+                    <button onclick="toggleCart()" class="relative p-2 text-brand-brown hover:bg-brand-cream rounded-lg transition group border border-transparent hover:border-brand-gold/30">
+                        <i data-lucide="shopping-bag" class="h-6 w-6 group-hover:scale-110 transition"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 inline-flex items-center justify-center w-5 h-5 text-[10px] font-bold leading-none text-white bg-brand-terracotta rounded-full shadow-sm hidden">0</span>
+                    </button>
+                </div>
+
+                <!-- Mobile Menu Button -->
+                <div class="flex md:hidden items-center gap-4">
+                    <button onclick="toggleCart()" class="relative p-1 text-brand-brown">
+                        <i data-lucide="shopping-bag" class="h-6 w-6"></i>
+                        <span id="mobile-cart-badge" class="absolute -top-1 -right-1 inline-flex items-center justify-center w-4 h-4 text-[9px] font-bold leading-none text-white bg-brand-terracotta rounded-full shadow-sm hidden">0</span>
+                    </button>
+                    <button onclick="toggleMobileMenu()" class="text-brand-brown p-1">
+                        <i data-lucide="menu" class="h-7 w-7"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-brand-gold/20 absolute w-full shadow-xl">
+            <div class="px-4 pt-4 pb-6 space-y-3">
+                <a href="#home" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-brand-brown hover:bg-brand-cream rounded-lg">Beranda</a>
+                <a href="#menu" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-brand-brown hover:bg-brand-cream rounded-lg">Menu Spesial</a>
+                <button onclick="toggleMobileMenu(); checkAndOpenQuiz()" class="w-full text-left px-3 py-2 text-base font-medium text-brand-brown bg-brand-brown/5 rounded-lg flex items-center gap-2">
+                    <i data-lucide="brain-circuit" class="w-4 h-4"></i> Tantangan Diskon
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="relative pt-28 pb-16 lg:pt-48 lg:pb-32 overflow-hidden bg-brand-cream">
+        <div class="absolute inset-0 z-0 opacity-10 bg-batik-subtle"></div>
+        <div class="absolute top-0 right-0 w-2/3 h-full pattern-kawung opacity-40 mix-blend-multiply pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+                <div class="space-y-6 lg:space-y-8 animate-fade-in-up text-center lg:text-left relative">
+                    <div class="hidden lg:block absolute -left-12 top-0 w-1 h-32 bg-gradient-to-b from-brand-gold to-transparent"></div>
+                    
+                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-brown/5 border border-brand-brown/20 rounded-full">
+                        <span class="w-2 h-2 rounded-full bg-brand-terracotta"></span>
+                        <span class="text-brand-brown text-xs font-bold tracking-widest uppercase">Authentic Indonesian Fusion</span>
+                    </div>
+                    
+                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-brand-dark leading-tight text-shadow-sm">
+                        Warisan Rasa <br>
+                        <span class="relative inline-block text-brand-terracotta">
+                            Nusantara
+                            <svg class="absolute -bottom-2 w-full h-3 text-brand-gold" viewBox="0 0 100 10" preserveAspectRatio="none">
+                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" />
+                            </svg>
+                        </span>
+                        <span class="block text-2xl md:text-4xl lg:text-5xl mt-2 text-stone-600 font-normal italic">Dalam Lipatan Perancis.</span>
+                    </h1>
+                    
+                    <p class="text-base md:text-lg text-stone-600 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light">
+                        Perpaduan mahakarya kuliner Eropa dengan kekayaan rempah Ibu Pertiwi. Hadirkan sensasi <strong class="text-brand-brown">Klepon Lumer</strong> dan <strong class="text-brand-terracotta">Ayam Rica-rica</strong>.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center lg:justify-start pt-2">
+                        <a href="#menu" class="px-8 py-3 md:py-4 bg-brand-brown text-white font-semibold shadow-xl hover:bg-brand-dark transition rounded-tr-2xl rounded-bl-2xl">
+                            Pesan Sekarang
+                        </a>
+                        <button onclick="checkAndOpenQuiz()" class="px-8 py-3 md:py-4 bg-transparent text-brand-brown border-2 border-brand-brown/20 font-semibold hover:bg-brand-brown/5 transition rounded-tl-2xl rounded-br-2xl flex items-center justify-center gap-2">
+                            <i data-lucide="percent" class="w-5 h-5"></i> Coba Diskon
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="relative group perspective-1000 mt-8 lg:mt-0">
+                    <div class="absolute inset-0 bg-brand-gold/20 transform rotate-3 rounded-3xl scale-95 blur-sm transition-transform group-hover:rotate-6"></div>
+                    <div class="relative grid grid-cols-2 gap-3 p-3 bg-white/50 backdrop-blur-sm border border-white/50 rounded-3xl shadow-2xl">
+                        <div class="corner-motif corner-tl"></div>
+                        <div class="corner-motif corner-tr"></div>
+                        <div class="corner-motif corner-bl"></div>
+                        <div class="corner-motif corner-br"></div>
+                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=600&q=80" class="rounded-xl shadow-md transform translate-y-4 hover:-translate-y-1 transition duration-700 object-cover h-40 md:h-64 w-full">
+                        <img src="https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=600&q=80" class="rounded-xl shadow-md hover:-translate-y-1 transition duration-700 object-cover h-40 md:h-64 w-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="absolute bottom-0 w-full overflow-hidden leading-none">
+            <svg class="relative block w-[calc(100%+1.3px)] h-[40px] md:h-[60px]" data-name="Layer 1" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 120" preserveAspectRatio="none">
+                <path d="M321.39,56.44c58-10.79,114.16-30.13,172-41.86,82.39-16.72,168.19-17.73,250.45-.39C823.78,31,906.67,72,985.66,92.83c70.05,18.48,146.53,26.09,214.34,3V0H0V27.35A600.21,600.21,0,0,0,321.39,56.44Z" class="fill-white"></path>
+            </svg>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="menu" class="py-16 md:py-24 bg-white relative">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12 md:mb-20 relative">
+                <span class="text-brand-terracotta font-serif italic text-lg">Pilihan Terbaik</span>
+                <h2 class="text-4xl md:text-5xl font-serif font-bold text-brand-dark mt-2">Menu Andalan</h2>
+                <div class="flex items-center justify-center gap-4 mt-6">
+                    <div class="h-[1px] w-12 bg-brand-gold"></div>
+                    <div class="w-3 h-3 rotate-45 border border-brand-brown bg-brand-gold"></div>
+                    <div class="h-[1px] w-12 bg-brand-gold"></div>
+                </div>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12 max-w-5xl mx-auto">
+                <!-- Klepon Card -->
+                <div class="bg-brand-cream group relative flex flex-col shadow-lg hover:shadow-2xl transition-all duration-500 rounded-none">
+                    <div class="corner-motif corner-tl"></div>
+                    <div class="corner-motif corner-tr"></div>
+                    <div class="corner-motif corner-bl"></div>
+                    <div class="corner-motif corner-br"></div>
+
+                    <div class="h-60 md:h-72 overflow-hidden relative m-3 mb-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="px-2 py-0.5 bg-klepon-green/90 text-white text-[10px] font-bold uppercase tracking-widest border border-white/20 mb-2 inline-block">Manis</span>
+                            <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-1 drop-shadow-md">Klepon Lumer</h3>
+                            <p class="text-brand-cream/90 text-sm font-light italic">Pandan • Gula Aren • Kelapa</p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-8 flex-1 flex flex-col justify-between border-t-2 border-brand-gold/20">
+                        <div class="mb-6 md:mb-8">
+                            <p class="text-stone-600 leading-relaxed font-light text-sm md:text-base">Sensasi tradisional yang elegan. Adonan croissant buttery diisi gula aren cair, dilapisi glaze pandan wangi dan taburan kelapa sangrai.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <!-- Made -->
+                            <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-brand-brown border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
+                                <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Made</p><p class="text-[10px] text-brand-terracotta uppercase tracking-wider">Manis Gede</p></div>
+                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 28.000</span><button onclick="addToCart('Klepon Made', 28000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                            </div>
+                            <!-- Macil -->
+                            <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-stone-300 border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
+                                <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Macil</p><p class="text-[10px] text-stone-500 uppercase tracking-wider">Manis Kecil</p></div>
+                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 12.000</span><button onclick="addToCart('Klepon Macil', 12000, 'https://images.unsplash.com/photo-1600093463592-8e36ae95ef56?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Rica-Rica Card -->
+                <div class="bg-brand-cream group relative flex flex-col shadow-lg hover:shadow-2xl transition-all duration-500 rounded-none">
+                    <div class="corner-motif corner-tl"></div>
+                    <div class="corner-motif corner-tr"></div>
+                    <div class="corner-motif corner-bl"></div>
+                    <div class="corner-motif corner-br"></div>
+
+                    <div class="h-60 md:h-72 overflow-hidden relative m-3 mb-0">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-transparent to-transparent z-10"></div>
+                        <img src="https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=800&q=80" class="w-full h-full object-cover transition duration-700 group-hover:scale-110">
+                        <div class="absolute bottom-6 left-6 z-20">
+                            <span class="px-2 py-0.5 bg-rica-red/90 text-white text-[10px] font-bold uppercase tracking-widest border border-white/20 mb-2 inline-block">Pedas</span>
+                            <h3 class="text-2xl md:text-3xl font-serif font-bold text-white mb-1 drop-shadow-md">Rica Membara</h3>
+                            <p class="text-brand-cream/90 text-sm font-light italic">Ayam Suwir • Pedas • Kemangi</p>
+                        </div>
+                    </div>
+
+                    <div class="p-6 md:p-8 flex-1 flex flex-col justify-between border-t-2 border-brand-gold/20">
+                        <div class="mb-6 md:mb-8">
+                            <p class="text-stone-600 leading-relaxed font-light text-sm md:text-base">Eksotisme Manado dalam satu gigitan. Ayam suwir bumbu rica-rica pedas aromatik, tersembunyi di dalam lapisan croissant renyah.</p>
+                        </div>
+                        <div class="space-y-4">
+                            <!-- Ade -->
+                            <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-brand-brown border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
+                                <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Ade</p><p class="text-[10px] text-brand-terracotta uppercase tracking-wider">Asin Gede</p></div>
+                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 32.000</span><button onclick="addToCart('Rica Ade', 32000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                            </div>
+                            <!-- Acil -->
+                            <div class="flex justify-between items-center bg-white p-3 md:p-4 border-l-4 border-l-stone-300 border border-stone-100 hover:border-brand-brown/30 transition shadow-sm">
+                                <div><p class="font-bold text-brand-dark font-serif text-base md:text-lg">Acil</p><p class="text-[10px] text-stone-500 uppercase tracking-wider">Asin Kecil</p></div>
+                                <div class="flex items-center gap-4"><span class="font-bold text-brand-dark">Rp 15.000</span><button onclick="addToCart('Rica Acil', 15000, 'https://images.unsplash.com/photo-1623334044303-241021148842?auto=format&fit=crop&w=100&q=80')" class="w-10 h-10 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full"><i data-lucide="plus" class="w-5 h-5"></i></button></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeQuiz()"></div>
+        <div class="bg-brand-cream w-full max-w-lg mx-4 shadow-2xl relative z-10 flex flex-col max-h-[85vh] overflow-hidden transform transition-all scale-95 opacity-0 border-2 border-brand-gold/50" id="quiz-content">
+            <div class="bg-brand-brown p-6 text-center relative overflow-hidden shrink-0 pattern-batik-cap">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-serif font-bold text-brand-gold">Tantangan Wawasan</h3>
+                    <div class="flex items-center justify-center gap-2 mt-2">
+                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
+                        <p class="text-white text-xs uppercase tracking-widest">Diskon 50%</p>
+                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
+                    </div>
+                </div>
+                <button onclick="closeQuiz()" class="absolute top-4 right-4 text-white/50 hover:text-white transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="p-8 overflow-y-auto custom-scrollbar bg-white relative">
+                <div class="absolute inset-0 pattern-kawung opacity-20 pointer-events-none"></div>
+
+                <div id="quiz-blocked" class="hidden text-center relative z-10">
+                    <div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-6 text-stone-500 border-2 border-stone-200 border-dashed"><i data-lucide="hourglass" class="w-8 h-8"></i></div>
+                    <h4 class="text-xl font-bold text-brand-dark mb-2 font-serif">Kesempatan Habis</h4>
+                    <p class="text-stone-600 mb-6 text-sm">Kesempatan hanya datang setiap 2 hari.</p>
+                    <div class="bg-brand-cream border border-brand-brown/20 p-4 mb-6"><p class="text-[10px] text-brand-brown uppercase tracking-widest mb-1">Coba lagi dalam:</p><p id="countdown-timer" class="text-xl font-mono font-bold text-brand-terracotta">00:00:00</p></div>
+                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-800 text-white font-bold hover:bg-black transition uppercase tracking-wider text-sm">Tutup</button>
+                </div>
+
+                <div id="quiz-form-container" class="hidden relative z-10">
+                    <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-8">
+                        <div id="questions-wrapper" class="space-y-8"></div>
+                        <button type="submit" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg flex items-center justify-center gap-2 border-b-4 border-brand-dark active:border-0 active:translate-y-1"><span>Kunci Jawaban</span><i data-lucide="lock" class="w-4 h-4"></i></button>
+                    </form>
+                </div>
+
+                <div id="quiz-success" class="hidden text-center relative z-10">
+                    <div class="w-24 h-24 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold border-2 border-brand-gold animate-bounce"><i data-lucide="award" class="w-12 h-12"></i></div>
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Luar Biasa!</h3>
+                    <p class="text-stone-600 mb-8 text-sm">Jawaban benar semua.</p>
+                    <div class="bg-brand-brown p-1 rounded-lg mb-8 shadow-inner">
+                        <div class="bg-brand-cream border border-brand-brown/30 p-4 rounded relative group cursor-pointer hover:bg-white transition" onclick="copyCode()">
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-1">Kode Voucher Anda</p>
+                            <!-- ID ini ditambahkan agar text kodenya bisa diubah menggunakan JS -->
+                            <p id="won-voucher-display" class="text-3xl font-mono font-bold text-brand-brown tracking-wider">NUSANTARA50</p>
+                            <div class="absolute inset-0 bg-brand-brown/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                                <span class="text-xs font-bold text-brand-brown bg-white px-3 py-1 shadow-sm border border-brand-brown">Salin Kode</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="closeQuizAndShop()" class="w-full py-3 bg-brand-terracotta text-white font-bold hover:bg-brand-brown transition shadow-lg uppercase tracking-wider text-sm">Gunakan Sekarang</button>
+                </div>
+
+                <div id="quiz-fail" class="hidden text-center relative z-10">
+                    <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-800 border-2 border-red-100"><i data-lucide="x-octagon" class="w-10 h-10"></i></div>
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Kurang Tepat</h3>
+                    <p class="text-stone-600 mb-8 text-sm">Jangan menyerah. Coba lagi 2 hari lagi.</p>
+                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition uppercase tracking-wider text-sm">Kembali ke Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Sidebar Cart -->
+    <div id="cart-sidebar" class="fixed inset-0 z-[60] hidden">
+        <div onclick="toggleCart()" class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm transition-opacity"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-brand-cream shadow-2xl flex flex-col transform transition-transform duration-300 translate-x-full border-l border-brand-brown/20" id="cart-panel">
+            <div class="p-6 border-b border-brand-brown/10 flex justify-between items-center bg-white pattern-kawung">
+                <div><h2 class="text-xl font-serif font-bold text-brand-dark">Pesanan Anda</h2><p class="text-xs text-stone-500">Siap dihidangkan</p></div>
+                <button onclick="toggleCart()" class="text-stone-400 hover:text-brand-terracotta transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+            <div class="p-6 border-t border-brand-brown/10 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                <div class="mb-6"><div class="flex gap-2"><input type="text" id="discount-code" placeholder="Kode Voucher" class="flex-1 border-2 border-stone-200 bg-stone-50 rounded-none px-4 py-2 text-sm focus:outline-none focus:border-brand-brown uppercase font-mono tracking-wider transition"><button onclick="applyDiscount()" class="bg-brand-dark text-white px-6 py-2 text-sm font-bold hover:bg-brand-brown transition uppercase tracking-wide">Pakai</button></div><p id="discount-msg" class="text-xs mt-2 hidden flex items-center gap-1"></p></div>
+                <div class="space-y-3 mb-6 font-serif"><div class="flex justify-between text-stone-600 text-sm"><span>Subtotal</span><span id="cart-subtotal" class="font-sans font-medium">Rp 0</span></div><div class="flex justify-between text-brand-terracotta hidden" id="discount-row"><span>Potongan (50%)</span><span id="discount-amount" class="font-sans font-medium">-Rp 0</span></div><div class="flex justify-between text-2xl font-bold text-brand-dark pt-4 border-t border-brand-brown/10"><span>Total</span><span id="cart-total" class="font-sans">Rp 0</span></div></div>
+                <button onclick="checkout()" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition flex justify-center items-center gap-3 shadow-lg group"><span>Proses Pesanan (WA)</span><i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bottom Floating Cart Bar -->
+    <div id="bottom-cart-bar" class="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 hidden transform transition-transform duration-300 translate-y-full">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col"><span class="text-xs text-stone-500 font-medium font-sans" id="bottom-bar-count">0 Item</span><span class="text-lg font-bold text-brand-dark font-sans" id="bottom-bar-total">Rp 0</span></div>
+            <button onclick="toggleCart()" class="bg-brand-brown text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-brand-dark transition flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="font-sans">Lihat Pesanan</span></button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-24 right-8 z-[70] transform translate-y-48 transition-transform duration-500">
+        <div class="bg-brand-dark text-white pl-4 pr-6 py-4 shadow-2xl flex items-center gap-4 border-l-4 border-brand-gold rounded-lg">
+            <div class="bg-brand-gold/20 p-2 rounded-full"><i data-lucide="check" class="w-5 h-5 text-brand-gold"></i></div>
+            <div><h4 class="font-serif font-bold text-base text-brand-gold">Pesanan Diterima</h4><p class="text-xs text-stone-400 tracking-wide mt-0.5">Item berhasil ditambahkan.</p></div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-brand-cream/60 py-16 border-t-8 border-brand-brown relative overflow-hidden">
+        <div class="absolute inset-0 pattern-batik-cap opacity-15"></div>
+        <div class="max-w-7xl mx-auto px-4 text-center relative z-10 flex flex-col items-center">
+            <div class="w-16 h-16 bg-brand-brown/20 rounded-full flex items-center justify-center mb-6 border border-brand-gold/20"><i data-lucide="croissant" class="h-8 w-8 text-brand-gold"></i></div>
+            <h2 class="font-serif text-3xl font-bold text-brand-cream mb-2">Crosantara.</h2>
+            <div class="flex items-center gap-4 mb-8"><div class="h-[1px] w-12 bg-brand-gold/30"></div><p class="text-xs uppercase tracking-[0.3em] text-brand-gold">Est. 2026</p><div class="h-[1px] w-12 bg-brand-gold/30"></div></div>
+            <p class="text-sm max-w-md mx-auto mb-10 leading-relaxed font-light">"Mengangkat cita rasa lokal ke panggung dunia, satu lipatan pastry pada satu waktu."</p>
+            <div class="flex gap-8 text-sm font-medium tracking-wide"><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Instagram</a><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">WhatsApp</a><a href="#" class="hover:text-brand-gold transition border-b border-transparent hover:border-brand-gold pb-1">Lokasi</a></div>
+            <p class="text-[10px] text-brand-cream/30 mt-12">&copy; 2026 Crosantara Indonesia. Dibuat dengan cinta dan tepung.</p>
+        </div>
+        <div class="h-3 w-full pattern-batik-cap absolute bottom-0 left-0"></div>
+    </footer>
+
+    <script>
+        // --- DATA VOUCHER (100 Kode Acak) ---
+        const VOUCHER_CODES = [
+            "X8F9KQ2M", "J3N7C5VW", "R1T6Y8PL", "M4B2V9XC", "Z7K3M1NQ", "P8W2R5TC", "L9J4F6HX", "V2C7B3NM", "Q5X8Z1KP", "T3R9Y2LW",
+            "H6F4J8MN", "K1P7W5TC", "N9M2B4VX", "C8V3Z6LQ", "X5K9R1PT", "J2F7H4MW", "B6N3C8VX", "L1T5Y9PQ", "M7K2J4FN", "R8W3P6TC",
+            "V4C9B1NX", "Z2X7K5MQ", "P3T8R1LW", "H9F2J6MN", "K4P1W7TC", "N5M8B2VX", "C6V9Z3LQ", "X1K4R8PT", "J7F3H5MW", "B2N6C9VX",
+            "L8T1Y4PQ", "M3K7J2FN", "R9W5P1TC", "V6C2B8NX", "Z1X4K9MQ", "P7T3R6LW", "H5F8J1MN", "K2P9W4TC", "N8M5B7VX", "C1V6Z2LQ",
+            "X9K2R5PT", "J4F1H8MW", "B7N9C3VX", "L5T6Y1PQ", "M2K8J9FN", "R4W1P7TC", "V8C5B2NX", "Z9X3K6MQ", "P1T4R8LW", "H2F7J5MN",
+            "K6P3W9TC", "N1M4B8VX", "C5V2Z7LQ", "X3K8R4PT", "J9F5H1MW", "B4N1C6VX", "L2T9Y5PQ", "M8K5J3FN", "R1W7P2TC", "V9C4B5NX",
+            "Z5X1K8MQ", "P4T6R9LW", "H8F3J2MN", "K9P5W1TC", "N3M7B4VX", "C2V8Z9LQ", "X6K1R7PT", "J5F9H2MW", "B1N4C8VX", "L7T2Y6PQ",
+            "M5K3J8FN", "R2W9P4TC", "V1C6B7NX", "Z8X5K2MQ", "P9T1R3LW", "H4F6J9MN", "K7P2W8TC", "N6M1B5VX", "C9V4Z1LQ", "X2K7R3PT",
+            "J1F8H5MW", "B9N2C4VX", "L4T7Y8PQ", "M6K9J1FN", "R5W4P8TC", "V3C1B9NX", "Z4X8K5MQ", "P2T9R6LW", "H7F1J4MN", "K5P8W2TC",
+            "N2M9B6VX", "C4V7Z3LQ", "X8K5R1PT", "J6F2H9MW", "B3N5C1VX", "L9T4Y2PQ", "M1K6J7FN", "R7W2P5TC", "V5C8B3NX", "Z6X9K1MQ"
+        ];
+
+        // --- DATA SOAL (200 SOAL NUSANTARA) ---
+        const questionBank = [
+            // Sejarah (1-25)
+            { id: 1, q: "Siapakah tokoh pahlawan yang dikenal sebagai 'Bapak Pendidikan Nasional'?", options: ["Ki Hajar Dewantara", "Ahmad Dahlan", "Bung Hatta"], a: "Ki Hajar Dewantara" },
+            { id: 2, q: "Semboyan 'Bhinneka Tunggal Ika' diambil dari kitab Sutasoma karya?", options: ["Mpu Tantular", "Mpu Prapanca", "Mpu Gandring"], a: "Mpu Tantular" },
+            { id: 3, q: "Lagu kebangsaan Indonesia Raya pertama kali dikumandangkan pada?", options: ["Sumpah Pemuda 1928", "Proklamasi 1945", "Sidang BPUPKI"], a: "Sumpah Pemuda 1928" },
+            { id: 4, q: "Siapa penjahit bendera Merah Putih pertama?", options: ["Fatmawati", "Kartini", "Dewi Sartika"], a: "Fatmawati" },
+            { id: 5, q: "Dimana teks proklamasi kemerdekaan dibacakan?", options: ["Jl. Pegangsaan Timur 56", "Jl. Imam Bonjol 1", "Istana Merdeka"], a: "Jl. Pegangsaan Timur 56" },
+            { id: 6, q: "Kerajaan Budha terbesar di Indonesia adalah?", options: ["Sriwijaya", "Majapahit", "Tarumanegara"], a: "Sriwijaya" },
+            { id: 7, q: "Siapakah yang dikenal sebagai Pahlawan Revolusi?", options: ["Jenderal Ahmad Yani", "Jenderal Sudirman", "Sultan Hamengkubuwono IX"], a: "Jenderal Ahmad Yani" },
+            { id: 8, q: "Sultan Hasanuddin memimpin perjuangan melawan VOC di daerah?", options: ["Makassar", "Ternate", "Maluku"], a: "Makassar" },
+            { id: 9, q: "Siapa penulis buku 'Habis Gelap Terbitlah Terang'?", options: ["R.A. Kartini", "Cut Nyak Dien", "Dewi Sartika"], a: "R.A. Kartini" },
+            { id: 10, q: "Maha Patih Majapahit yang mengucapkan Sumpah Palapa adalah?", options: ["Gajah Mada", "Hayam Wuruk", "Raden Wijaya"], a: "Gajah Mada" },
+            { id: 11, q: "Konferensi Asia Afrika (KAA) pertama dilaksanakan di kota?", options: ["Bandung", "Jakarta", "Yogyakarta"], a: "Bandung" },
+            { id: 12, q: "Perjanjian Linggarjati ditandatangani pada tahun?", options: ["1946", "1945", "1947"], a: "1946" },
+            { id: 13, q: "Agresi Militer Belanda I terjadi pada tahun?", options: ["1947", "1948", "1949"], a: "1947" },
+            { id: 14, q: "Siapa pencipta lagu 'Bagimu Negeri'?", options: ["Kusbini", "Ibu Sud", "Ismail Marzuki"], a: "Kusbini" },
+            { id: 15, q: "Pahlawan yang memimpin perang di Maluku melawan VOC adalah?", options: ["Pattimura", "Imam Bonjol", "Pangeran Antasari"], a: "Pattimura" },
+            { id: 16, q: "Kapan Pancasila lahir?", options: ["1 Juni 1945", "17 Agustus 1945", "1 Oktober 1945"], a: "1 Juni 1945" },
+            { id: 17, q: "Siapa Wakil Presiden pertama RI?", options: ["Moh. Hatta", "Adam Malik", "Sultan HB IX"], a: "Moh. Hatta" },
+            { id: 18, q: "Nama kapal Belanda yang pertama kali mendarat di Banten dipimpin Cornelis de Houtman?", options: ["Mauritius", "Batavia", "Zeven Provincien"], a: "Mauritius" },
+            { id: 19, q: "Apa nama organisasi pemuda pertama di Indonesia?", options: ["Budi Utomo", "Tri Koro Dharmo", "Jong Java"], a: "Budi Utomo" },
+            { id: 20, q: "Siapa pahlawan dari Aceh yang memimpin Perang Sabil?", options: ["Cut Nyak Dien", "Martha Christina Tiahahu", "Dewi Sartika"], a: "Cut Nyak Dien" },
+            { id: 21, q: "Kerajaan Islam pertama di Indonesia adalah?", options: ["Samudera Pasai", "Demak", "Mataram Islam"], a: "Samudera Pasai" },
+            { id: 22, q: "Siapa tokoh yang mengetik teks proklamasi?", options: ["Sayuti Melik", "Sukarni", "B.M. Diah"], a: "Sayuti Melik" },
+            { id: 23, q: "Negara manakah yang pertama kali mengakui kemerdekaan Indonesia secara de jure?", options: ["Mesir", "India", "Palestina"], a: "Mesir" },
+            { id: 24, q: "Siapa Jenderal yang memimpin perang gerilya saat Agresi Militer II?", options: ["Jenderal Sudirman", "Jenderal Gatot Subroto", "Jenderal Nasution"], a: "Jenderal Sudirman" },
+            { id: 25, q: "Apa kepanjangan dari BPUPKI?", options: ["Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia", "Badan Pembuat Undang-undang Proklamasi Kemerdekaan Indonesia", "Badan Peneliti Utusan Persatuan Kemerdekaan Indonesia"], a: "Badan Penyelidik Usaha-usaha Persiapan Kemerdekaan Indonesia" },
+
+            // Geografi (26-50)
+            { id: 26, q: "Provinsi apakah yang terletak paling barat di Indonesia?", options: ["Aceh", "Sumatera Utara", "Kepulauan Riau"], a: "Aceh" },
+            { id: 27, q: "Danau vulkanik terbesar di dunia yang ada di Sumatera Utara adalah?", options: ["Danau Toba", "Danau Singkarak", "Danau Maninjau"], a: "Danau Toba" },
+            { id: 28, q: "Gunung tertinggi di Pulau Jawa adalah?", options: ["Gunung Semeru", "Gunung Merapi", "Gunung Slamet"], a: "Gunung Semeru" },
+            { id: 29, q: "Selat yang memisahkan Pulau Jawa dan Pulau Bali adalah?", options: ["Selat Bali", "Selat Sunda", "Selat Madura"], a: "Selat Bali" },
+            { id: 30, q: "Pulau terbesar di Indonesia (secara wilayah administratif NKRI) adalah?", options: ["Papua", "Kalimantan", "Sumatera"], a: "Papua" },
+            { id: 31, q: "Apa nama sungai terpanjang di Indonesia?", options: ["Sungai Kapuas", "Sungai Mahakam", "Sungai Musi"], a: "Sungai Kapuas" },
+            { id: 32, q: "Kota yang dijuluki Kota Khatulistiwa adalah?", options: ["Pontianak", "Samarinda", "Palu"], a: "Pontianak" },
+            { id: 33, q: "Kepulauan Derawan terletak di provinsi?", options: ["Kalimantan Timur", "Sulawesi Utara", "Papua Barat"], a: "Kalimantan Timur" },
+            { id: 34, q: "Wakatobi adalah destinasi selam terkenal di provinsi?", options: ["Sulawesi Tenggara", "Sulawesi Selatan", "Maluku"], a: "Sulawesi Tenggara" },
+            { id: 35, q: "Ibu kota provinsi Maluku Utara adalah?", options: ["Sofifi", "Ternate", "Ambon"], a: "Sofifi" },
+            { id: 36, q: "Gunung Rinjani terletak di pulau?", options: ["Lombok", "Sumbawa", "Flores"], a: "Lombok" },
+            { id: 37, q: "Taman Nasional Lore Lindu ada di provinsi?", options: ["Sulawesi Tengah", "Sulawesi Barat", "Sulawesi Selatan"], a: "Sulawesi Tengah" },
+            { id: 38, q: "Garis khayal yang memisahkan flora fauna tipe Asiatis dengan tipe Peralihan di Indonesia adalah?", options: ["Garis Wallace", "Garis Weber", "Garis Khatulistiwa"], a: "Garis Wallace" },
+            { id: 39, q: "Provinsi termuda ke-38 di Indonesia (pemekaran Papua) adalah?", options: ["Papua Barat Daya", "Papua Pegunungan", "Papua Selatan"], a: "Papua Barat Daya" },
+            { id: 40, q: "Danau Tiga Warna (Kelimutu) berada di pulau?", options: ["Flores", "Sumba", "Alor"], a: "Flores" },
+            { id: 41, q: "Provinsi Bangka Belitung terkenal dengan hasil tambang?", options: ["Timah", "Emas", "Batu Bara"], a: "Timah" },
+            { id: 42, q: "Taman Nasional Ujung Kulon merupakan habitat asli hewan endemik?", options: ["Badak Bercula Satu", "Gajah", "Harimau"], a: "Badak Bercula Satu" },
+            { id: 43, q: "Gunung api aktif yang terletak di Selat Sunda adalah?", options: ["Anak Krakatau", "Gunung Gede", "Gunung Galunggung"], a: "Anak Krakatau" },
+            { id: 44, q: "Pelabuhan penyeberangan dari Pulau Jawa menuju Pulau Bali di Banyuwangi bernama?", options: ["Ketapang", "Gilimanuk", "Bakauheni"], a: "Ketapang" },
+            { id: 45, q: "Kepulauan Raja Ampat saat ini secara administratif berada di provinsi?", options: ["Papua Barat Daya", "Papua Barat", "Papua Tengah"], a: "Papua Barat Daya" },
+            { id: 46, q: "Kota Ambon dijuluki sebagai Kota?", options: ["Musik", "Bunga", "Bahari"], a: "Musik" },
+            { id: 47, q: "Suku Dayak merupakan suku asli yang mendiami pulau?", options: ["Kalimantan", "Sulawesi", "Sumatera"], a: "Kalimantan" },
+            { id: 48, q: "Ibu kota provinsi Lampung adalah?", options: ["Bandar Lampung", "Palembang", "Bengkulu"], a: "Bandar Lampung" },
+            { id: 49, q: "Labuan Bajo adalah pintu masuk utama menuju Taman Nasional?", options: ["Pulau Komodo", "Kepulauan Seribu", "Pulau Bunaken"], a: "Pulau Komodo" },
+            { id: 50, q: "Puncak Jaya Wijaya di Papua dikenal karena terdapat?", options: ["Salju Abadi", "Hutan Hujan Tropis", "Kawah Vulkanik Besar"], a: "Salju Abadi" },
+
+            // Budaya & Seni (51-75)
+            { id: 51, q: "Apa nama tarian tradisional asal Bali yang menceritakan perlawanan Barong terhadap Rangda?", options: ["Tari Barong", "Tari Kecak", "Tari Pendet"], a: "Tari Barong" },
+            { id: 52, q: "Alat musik petik Sasando berasal dari daerah?", options: ["Nusa Tenggara Timur", "Nusa Tenggara Barat", "Maluku"], a: "Nusa Tenggara Timur" },
+            { id: 53, q: "Seni pertunjukan Wayang Kulit sangat erat dengan budaya suku?", options: ["Jawa", "Sunda", "Bali"], a: "Jawa" },
+            { id: 54, q: "Senjata tradisional khas masyarakat Sunda (Jawa Barat) adalah?", options: ["Kujang", "Keris", "Mandau"], a: "Kujang" },
+            { id: 55, q: "Rumah Gadang dengan ciri khas atap melengkung runcing adalah rumah adat dari provinsi?", options: ["Sumatera Barat", "Sumatera Utara", "Riau"], a: "Sumatera Barat" },
+            { id: 56, q: "Tari Saman yang dilakukan dengan gerakan tangan yang cepat dan kompak berasal dari?", options: ["Aceh", "Padang", "Palembang"], a: "Aceh" },
+            { id: 57, q: "Kain tradisional NTT yang ditenun secara manual disebut?", options: ["Tenun Ikat", "Kain Ulos", "Batik Tulis"], a: "Tenun Ikat" },
+            { id: 58, q: "Suku yang terkenal dengan tradisi lompat batu (Fahombo) adalah?", options: ["Suku Nias", "Suku Batak", "Suku Minang"], a: "Suku Nias" },
+            { id: 59, q: "Apa nama alat musik perkusi khas Minahasa (Sulawesi Utara) yang terbuat dari kayu?", options: ["Kolintang", "Angklung", "Gamelan"], a: "Kolintang" },
+            { id: 60, q: "Upacara pembakaran mayat umat Hindu di Bali disebut?", options: ["Ngaben", "Tiwah", "Rambu Solo"], a: "Ngaben" },
+            { id: 61, q: "Lagu daerah 'Rasa Sayange' berasal dari daerah?", options: ["Maluku", "Papua", "Nusa Tenggara Timur"], a: "Maluku" },
+            { id: 62, q: "Tari Piring dimainkan dengan properti piring di tangan, tarian ini berasal dari daerah?", options: ["Minangkabau", "Melayu", "Batak"], a: "Minangkabau" },
+            { id: 63, q: "Alat musik Angklung yang ditetapkan UNESCO sebagai warisan budaya dunia berasal dari provinsi?", options: ["Jawa Barat", "Jawa Tengah", "Banten"], a: "Jawa Barat" },
+            { id: 64, q: "Rumah adat Honai yang terbuat dari kayu dengan atap jerami berbentuk kerucut adalah milik suku di?", options: ["Papua", "Kalimantan Tengah", "Sulawesi Selatan"], a: "Papua" },
+            { id: 65, q: "Senjata tradisional khas suku Dayak adalah?", options: ["Mandau", "Parang Salawaku", "Rencong"], a: "Mandau" },
+            { id: 66, q: "Tari Jaipong diciptakan oleh Gugum Gumbira, seniman yang berasal dari?", options: ["Bandung", "Jakarta", "Yogyakarta"], a: "Bandung" },
+            { id: 67, q: "Kesenian debus yang mempertontonkan kekebalan tubuh berasal dari daerah?", options: ["Banten", "Jawa Tengah", "Madura"], a: "Banten" },
+            { id: 68, q: "Tarian magis pemanggil hujan di Cirebon dan Majalengka disebut?", options: ["Sintren", "Kuda Lumping", "Reog"], a: "Sintren" },
+            { id: 69, q: "Tradisi upacara pemakaman besar besaran di Tana Toraja disebut?", options: ["Rambu Solo", "Pasola", "Sekaten"], a: "Rambu Solo" },
+            { id: 70, q: "Motif batik yang dulunya hanya boleh dipakai oleh raja dan bangsawan keraton adalah?", options: ["Batik Parang", "Batik Mega Mendung", "Batik Kawung"], a: "Batik Parang" },
+            { id: 71, q: "Tari Tor-Tor yang kental dengan unsur magis berasal dari suku?", options: ["Batak Toba", "Minang", "Dayak"], a: "Batak Toba" },
+            { id: 72, q: "Penutup kepala pria Minangkabau yang dilipat-lipat disebut?", options: ["Deta / Saluak", "Blangkon", "Tanjak"], a: "Deta / Saluak" },
+            { id: 73, q: "Saluang adalah alat musik tiup sejenis seruling bambu yang berasal dari provinsi?", options: ["Sumatera Barat", "Jawa Barat", "Sulawesi Selatan"], a: "Sumatera Barat" },
+            { id: 74, q: "Apa nama rumah adat Suku Bugis di Sulawesi Selatan?", options: ["Bola / Saoraja", "Tongkonan", "Limas"], a: "Bola / Saoraja" },
+            { id: 75, q: "Perayaan menyambut Maulid Nabi Muhammad di Yogyakarta dan Surakarta disebut perayaan?", options: ["Sekaten", "Grebeg", "Tahlilan"], a: "Sekaten" },
+
+            // Pengetahuan Umum & Modern (76-100)
+            { id: 76, q: "Bunga nasional Indonesia yang dijuluki Puspa Bangsa adalah?", options: ["Melati Putih", "Anggrek Bulan", "Rafflesia Arnoldii"], a: "Melati Putih" },
+            { id: 77, q: "Burung apa yang menjadi lambang negara Republik Indonesia?", options: ["Garuda", "Elang Jawa", "Cendrawasih"], a: "Garuda" },
+            { id: 78, q: "Ibu Kota Negara (IKN) baru Indonesia yang dibangun di Kalimantan Timur bernama?", options: ["Nusantara", "Jayapura", "Palangkaraya"], a: "Nusantara" },
+            { id: 79, q: "Siapa Presiden ke-3 Republik Indonesia yang juga dikenal sebagai Bapak Teknologi?", options: ["B.J. Habibie", "Abdurrahman Wahid", "Megawati"], a: "B.J. Habibie" },
+            { id: 80, q: "Apa nama satelit pertama yang diluncurkan oleh Indonesia pada tahun 1976?", options: ["Palapa", "Telkom", "Indostar"], a: "Palapa" },
+            { id: 81, q: "Mata uang resmi Republik Indonesia adalah?", options: ["Rupiah", "Ringgit", "Dollar"], a: "Rupiah" },
+            { id: 82, q: "Kode telepon internasional untuk negara Indonesia adalah?", options: ["+62", "+60", "+65"], a: "+62" },
+            { id: 83, q: "Lembaga tinggi negara yang bertugas memeriksa pengelolaan dan tanggung jawab keuangan negara adalah?", options: ["BPK", "KPK", "Mahkamah Agung"], a: "BPK" },
+            { id: 84, q: "Sensus penduduk di Indonesia yang diselenggarakan oleh BPS dilakukan setiap?", options: ["10 Tahun sekali", "5 Tahun sekali", "2 Tahun sekali"], a: "10 Tahun sekali" },
+            { id: 85, q: "Siapa Presiden Indonesia pertama yang dipilih langsung oleh rakyat melalui Pemilu?", options: ["Susilo Bambang Yudhoyono", "Joko Widodo", "Megawati Soekarnoputri"], a: "Susilo Bambang Yudhoyono" },
+            { id: 86, q: "Sesuai aturan terbaru, apa warna dasar plat nomor untuk kendaraan pribadi di Indonesia?", options: ["Putih tulisan Hitam", "Hitam tulisan Putih", "Merah tulisan Putih"], a: "Putih tulisan Hitam" },
+            { id: 87, q: "Situs warisan dunia Candi Borobudur secara administratif terletak di kabupaten?", options: ["Magelang", "Sleman", "Klaten"], a: "Magelang" },
+            { id: 88, q: "Hari Batik Nasional diperingati oleh masyarakat Indonesia setiap tanggal?", options: ["2 Oktober", "21 April", "10 November"], a: "2 Oktober" },
+            { id: 89, q: "Apa nama jembatan sepanjang 5,4 km yang menghubungkan Surabaya dan Pulau Madura?", options: ["Jembatan Suramadu", "Jembatan Ampera", "Jembatan Pasupati"], a: "Jembatan Suramadu" },
+            { id: 90, q: "Lambang Pohon Beringin pada perisai Garuda Pancasila mewakili sila ke-?", options: ["3 (Tiga)", "4 (Empat)", "5 (Lima)"], a: "3 (Tiga)" },
+            { id: 91, q: "Pembalap mobil asal Indonesia pertama yang berhasil membalap di ajang Formula 1 (F1) adalah?", options: ["Rio Haryanto", "Ananda Mikola", "Sean Gelael"], a: "Rio Haryanto" },
+            { id: 92, q: "Seni bela diri asli Indonesia yang sering dipertandingkan di ajang SEA Games dan Asian Games adalah?", options: ["Pencak Silat", "Tarung Derajat", "Merpati Putih"], a: "Pencak Silat" },
+            { id: 93, q: "Bandar Udara Internasional Kualanamu terletak di provinsi?", options: ["Sumatera Utara", "Sumatera Selatan", "Riau"], a: "Sumatera Utara" },
+            { id: 94, q: "Minuman tradisional Indonesia yang menyehatkan seperti beras kencur dan kunyit asam secara umum disebut?", options: ["Jamu", "Wedang", "Badek"], a: "Jamu" },
+            { id: 95, q: "Hingga tahun 2024, jumlah total provinsi di Indonesia adalah?", options: ["38 Provinsi", "34 Provinsi", "37 Provinsi"], a: "38 Provinsi" },
+            { id: 96, q: "Stadion utama dan terbesar di Indonesia yang terletak di Senayan, Jakarta adalah?", options: ["Gelora Bung Karno", "Jakarta International Stadium", "Gelora Bung Tomo"], a: "Gelora Bung Karno" },
+            { id: 97, q: "Apa sebutan resmi untuk Kereta Cepat Jakarta-Bandung?", options: ["Whoosh", "Argo Bromo", "KRL Commuter"], a: "Whoosh" },
+            { id: 98, q: "Sungai terpanjang kedua di Indonesia setelah Kapuas yang terletak di Kalimantan Timur adalah?", options: ["Sungai Mahakam", "Sungai Barito", "Sungai Musi"], a: "Sungai Mahakam" },
+            { id: 99, q: "Provinsi yang wilayahnya mendapatkan otonomi khusus dengan gelar 'Daerah Istimewa' di Pulau Jawa adalah?", options: ["Yogyakarta", "Jakarta", "Banten"], a: "Yogyakarta" },
+            { id: 100, q: "Apa nama laut dangkal yang terletak di antara Pulau Jawa dan Pulau Kalimantan?", options: ["Laut Jawa", "Laut Banda", "Selat Makassar"], a: "Laut Jawa" },
+
+            // Kuliner (101-125)
+            { id: 101, q: "Makanan khas Palembang yang terbuat dari olahan daging ikan dan sagu adalah?", options: ["Pempek", "Tekwan", "Otak-otak"], a: "Pempek" },
+            { id: 102, q: "Sate Lilit yang dagingnya dililitkan pada batang serai atau bambu merupakan makanan khas dari daerah?", options: ["Bali", "Madura", "Padang"], a: "Bali" },
+            { id: 103, q: "Papeda adalah bubur sagu yang menjadi makanan pokok masyarakat di wilayah?", options: ["Papua dan Maluku", "Nusa Tenggara", "Sulawesi"], a: "Papua dan Maluku" },
+            { id: 104, q: "Kerak Telor adalah jajanan tradisional gurih yang berasal dari suku?", options: ["Betawi", "Sunda", "Jawa"], a: "Betawi" },
+            { id: 105, q: "Bika Ambon merupakan kue tradisional berongga yang berasal dari kota?", options: ["Medan", "Ambon", "Makassar"], a: "Medan" },
+            { id: 106, q: "Soto Banjar adalah sajian soto kaya rempah yang berasal dari provinsi?", options: ["Kalimantan Selatan", "Jawa Timur", "Kalimantan Barat"], a: "Kalimantan Selatan" },
+            { id: 107, q: "Ayam Taliwang yang terkenal dengan bumbu pedasnya adalah kuliner khas dari pulau?", options: ["Lombok", "Sumbawa", "Bali"], a: "Lombok" },
+            { id: 108, q: "Mie tebal bercita rasa pedas kari ini dinamakan Mie Aceh. Dari provinsi manakah asalnya?", options: ["Nanggroe Aceh Darussalam", "Sumatera Utara", "Sumatera Barat"], a: "Nanggroe Aceh Darussalam" },
+            { id: 109, q: "Makanan khas Makassar berupa sup daging sapi berdaging atau jeroan adalah?", options: ["Coto Makassar", "Pallubasa", "Sop Konro"], a: "Coto Makassar" },
+            { id: 110, q: "Nasi Liwet yang disajikan dengan sayur labu siam dan suwiran ayam adalah makanan tradisional khas kota?", options: ["Solo", "Yogyakarta", "Bandung"], a: "Solo" },
+            { id: 111, q: "Rendang yang dinobatkan sebagai salah satu makanan terenak di dunia berasal dari kebudayaan suku?", options: ["Minangkabau", "Melayu", "Batak"], a: "Minangkabau" },
+            { id: 112, q: "Seblak merupakan makanan pedas dengan bumbu kencur dan kerupuk basah yang dipopulerkan dari daerah?", options: ["Bandung (Jawa Barat)", "Cirebon", "Garut"], a: "Bandung (Jawa Barat)" },
+            { id: 113, q: "Es Pisang Ijo adalah sajian penutup khas yang disajikan dengan bubur sumsum dari kota?", options: ["Makassar", "Manado", "Kendari"], a: "Makassar" },
+            { id: 114, q: "Lumpia yang berisi rebung, telur, dan daging ayam/udang adalah jajanan khas dari kota?", options: ["Semarang", "Salatiga", "Yogyakarta"], a: "Semarang" },
+            { id: 115, q: "Kue Lontar adalah kue sejenis pie susu yang sangat terkenal di daerah?", options: ["Papua", "Maluku", "Nusa Tenggara Timur"], a: "Papua" },
+            { id: 116, q: "Sate khas yang menggunakan bumbu kacang pekat manis dan sering dijajakan berkeliling adalah?", options: ["Sate Madura", "Sate Padang", "Sate Taichan"], a: "Sate Madura" },
+            { id: 117, q: "Rawon memiliki ciri khas kuah berwarna hitam pekat karena menggunakan bumbu dari biji?", options: ["Kluwek", "Kemiri", "Pala"], a: "Kluwek" },
+            { id: 118, q: "Ayam Betutu adalah sajian ayam berbumbu pekat yang dipanggang lambat, makanan ini khas dari?", options: ["Bali", "Lombok", "Banyuwangi"], a: "Bali" },
+            { id: 119, q: "Surabi khas yang digulung dengan daun pisang dan terkenal dengan sebutan Serabi Notosuman berasal dari?", options: ["Solo", "Bandung", "Cirebon"], a: "Solo" },
+            { id: 120, q: "Karedok adalah makanan yang terbuat dari sayuran mentah bersaus kacang, khas dari daerah?", options: ["Jawa Barat (Sunda)", "Jawa Tengah", "Jawa Timur"], a: "Jawa Barat (Sunda)" },
+            { id: 121, q: "Soto Lamongan memiliki ciri khas taburan bubuk gurih yang terbuat dari kerupuk udang dan bawang putih yang disebut?", options: ["Koya", "Abon", "Bawang Goreng"], a: "Koya" },
+            { id: 122, q: "Pempek selalu disajikan dengan kuah kental berwarna hitam manis pedas yang disebut?", options: ["Cuko", "Kuah Rujak", "Bumbu Petis"], a: "Cuko" },
+            { id: 123, q: "Tempoyak adalah masakan khas Sumatera bagian selatan yang terbuat dari hasil fermentasi buah?", options: ["Durian", "Nangka", "Cempedak"], a: "Durian" },
+            { id: 124, q: "Tinutuan atau yang lebih dikenal dengan Bubur Manado adalah makanan khas dari provinsi?", options: ["Sulawesi Utara", "Sulawesi Selatan", "Sulawesi Tengah"], a: "Sulawesi Utara" },
+            { id: 125, q: "Gudeg adalah sayur nangka muda manis yang merupakan kuliner ikonik dari kota?", options: ["Yogyakarta", "Bantul", "Gunungkidul"], a: "Yogyakarta" },
+
+            // Sejarah & Tokoh 2 (126-150)
+            { id: 126, q: "Siapakah nama asli dari Pangeran Diponegoro?", options: ["Raden Mas Ontowiryo", "Raden Mas Said", "Raden Syahid"], a: "Raden Mas Ontowiryo" },
+            { id: 127, q: "Tuanku Imam Bonjol adalah pahlawan nasional yang memimpin rakyat Sumatera Barat dalam Perang?", options: ["Padri", "Puputan", "Aceh"], a: "Padri" },
+            { id: 128, q: "Pahlawan wanita dari Jawa Barat yang berjuang mendirikan sekolah Keutamaan Istri adalah?", options: ["Dewi Sartika", "R.A. Kartini", "Cut Nyak Meutia"], a: "Dewi Sartika" },
+            { id: 129, q: "Prasasti Yupa peninggalan Kerajaan Kutai Martadipura (kerajaan Hindu tertua) ditulis menggunakan aksara?", options: ["Pallawa", "Kawi", "Brahmi"], a: "Pallawa" },
+            { id: 130, q: "Kerajaan Majapahit mencapai puncak kejayaannya pada masa pemerintahan Raja?", options: ["Hayam Wuruk", "Raden Wijaya", "Jayanegara"], a: "Hayam Wuruk" },
+            { id: 131, q: "Organisasi pergerakan Budi Utomo didirikan oleh mahasiswa STOVIA yang diketuai oleh?", options: ["Dr. Soetomo", "Dr. Cipto Mangunkusumo", "Ki Hajar Dewantara"], a: "Dr. Soetomo" },
+            { id: 132, q: "Kongres Pemuda II yang melahirkan ikrar Sumpah Pemuda diadakan pada tanggal?", options: ["28 Oktober 1928", "20 Mei 1908", "17 Agustus 1945"], a: "28 Oktober 1928" },
+            { id: 133, q: "Siapakah dua tokoh proklamator kemerdekaan yang dijuluki sebagai Bapak Bangsa?", options: ["Soekarno dan Moh. Hatta", "Soekarno dan Syahrir", "Soekarno dan Sudirman"], a: "Soekarno dan Moh. Hatta" },
+            { id: 134, q: "Perundingan yang menghasilkan kesepakatan penyerahan kedaulatan kepada RIS di Den Haag (1949) dinamakan?", options: ["Konferensi Meja Bundar", "Perundingan Linggarjati", "Perjanjian Renville"], a: "Konferensi Meja Bundar" },
+            { id: 135, q: "Pemimpin pertempuran 10 November 1945 di Surabaya yang membakar semangat rakyat dengan pidatonya adalah?", options: ["Bung Tomo", "Gubernur Suryo", "A.W.S. Mallaby"], a: "Bung Tomo" },
+            { id: 136, q: "Untuk mengenang Pertempuran Surabaya, bangsa Indonesia memperingatinya sebagai?", options: ["Hari Pahlawan", "Hari Kesaktian Pancasila", "Hari Kebangkitan Nasional"], a: "Hari Pahlawan" },
+            { id: 137, q: "Peristiwa Gerakan 30 September (G30S) terjadi pada tahun?", options: ["1965", "1966", "1948"], a: "1965" },
+            { id: 138, q: "Operasi militer yang dicetuskan Presiden Soekarno untuk membebaskan Irian Barat dinamakan?", options: ["Trikora", "Dwikora", "Seroja"], a: "Trikora" },
+            { id: 139, q: "Pahlawan nasional asal Maluku yang memimpin perlawanan di Benteng Duurstede Saparua adalah?", options: ["Kapitan Pattimura", "Christina Martha Tiahahu", "Sultan Nuku"], a: "Kapitan Pattimura" },
+            { id: 140, q: "Cut Nyak Meutia adalah pahlawan wanita yang berjuang menentang Belanda di daerah?", options: ["Aceh", "Minangkabau", "Banten"], a: "Aceh" },
+            { id: 141, q: "Panglima Besar TNI pertama yang memimpin perang gerilya menembus hutan meski sedang sakit adalah?", options: ["Jenderal Sudirman", "Jenderal Oerip Soemohardjo", "Jenderal A.H. Nasution"], a: "Jenderal Sudirman" },
+            { id: 142, q: "Tiga Serangkai (Douwes Dekker, Ki Hajar Dewantara, Cipto Mangunkusumo) merupakan pendiri partai bernama?", options: ["Indische Partij", "Sarekat Islam", "Partai Nasional Indonesia"], a: "Indische Partij" },
+            { id: 143, q: "Prasasti Ciaruteun yang menampilkan cap telapak kaki Raja Purnawarman adalah peninggalan kerajaan?", options: ["Tarumanegara", "Salakanagara", "Pajajaran"], a: "Tarumanegara" },
+            { id: 144, q: "Sumpah Palapa diucapkan oleh Gajah Mada pada masa pemerintahan Ratu Majapahit bernama?", options: ["Tribhuwana Tunggadewi", "Dyah Pitaloka", "Ratu Kalinyamat"], a: "Tribhuwana Tunggadewi" },
+            { id: 145, q: "Pemimpin armada niaga Belanda yang pertama kali berlabuh di Banten tahun 1596 adalah?", options: ["Cornelis de Houtman", "Jan Pieterszoon Coen", "Herman Willem Daendels"], a: "Cornelis de Houtman" },
+            { id: 146, q: "Undang-Undang Dasar Negara Kesatuan RI Tahun 1945 disahkan pertama kali oleh PPKI pada?", options: ["18 Agustus 1945", "17 Agustus 1945", "1 Juni 1945"], a: "18 Agustus 1945" },
+            { id: 147, q: "Organisasi Islam Muhammadiyah didirikan di Kampung Kauman Yogyakarta (1912) oleh?", options: ["K.H. Ahmad Dahlan", "K.H. Hasyim Asy'ari", "H.O.S. Tjokroaminoto"], a: "K.H. Ahmad Dahlan" },
+            { id: 148, q: "Organisasi Nahdlatul Ulama (NU) didirikan di Surabaya (1926) oleh tokoh ulama?", options: ["K.H. Hasyim Asy'ari", "K.H. Wahid Hasyim", "K.H. Bisri Syansuri"], a: "K.H. Hasyim Asy'ari" },
+            { id: 149, q: "Perguruan Taman Siswa didirikan pada tanggal 3 Juli 1922 oleh Ki Hajar Dewantara di kota?", options: ["Yogyakarta", "Surakarta", "Jakarta"], a: "Yogyakarta" },
+            { id: 150, q: "Pahlawan nasional dari Sulawesi Selatan yang memimpin perlawanan panjang dalam Perang Makassar adalah?", options: ["Sultan Hasanuddin", "Arung Palakka", "Sultan Baabullah"], a: "Sultan Hasanuddin" },
+
+            // Geografi 2 (151-175)
+            { id: 151, q: "Pulau Bali secara geografis terletak di antara Pulau Jawa dan Pulau?", options: ["Lombok", "Sumbawa", "Madura"], a: "Lombok" },
+            { id: 152, q: "Sungai yang dinobatkan sebagai sungai terpanjang di Pulau Jawa adalah?", options: ["Bengawan Solo", "Sungai Brantas", "Sungai Citarum"], a: "Bengawan Solo" },
+            { id: 153, q: "Gunung api berstatus tertinggi di hamparan Pulau Sumatera adalah Gunung?", options: ["Kerinci", "Leuser", "Dempo"], a: "Kerinci" },
+            { id: 154, q: "Danau tektonik terdalam di Indonesia, bahkan Asia Tenggara, yang terletak di Sulawesi Selatan adalah?", options: ["Danau Matano", "Danau Poso", "Danau Towuti"], a: "Danau Matano" },
+            { id: 155, q: "Kawasan habitat Komodo yang diakui UNESCO sebagai situs warisan dunia terletak di provinsi?", options: ["Nusa Tenggara Timur", "Nusa Tenggara Barat", "Bali"], a: "Nusa Tenggara Timur" },
+            { id: 156, q: "Selat besar yang memisahkan perairan Pulau Sulawesi dengan Pulau Kalimantan adalah Selat?", options: ["Makassar", "Karimata", "Sunda"], a: "Makassar" },
+            { id: 157, q: "Kepulauan Mentawai yang tersohor sebagai destinasi ombak peselancar dunia terletak di provinsi?", options: ["Sumatera Barat", "Sumatera Utara", "Bengkulu"], a: "Sumatera Barat" },
+            { id: 158, q: "Suku Sasak merupakan nama bagi kelompok etnis pribumi yang mendiami Pulau?", options: ["Lombok", "Sumbawa", "Sumba"], a: "Lombok" },
+            { id: 159, q: "Kawasan wisata pasir putih populer seperti Pantai Kuta, Sanur, dan Seminyak berada di provinsi?", options: ["Bali", "Nusa Tenggara Barat", "Jawa Timur"], a: "Bali" },
+            { id: 160, q: "Garis khayal pembatas wilayah fauna tipe Peralihan dengan tipe Australis di timur Indonesia dinamakan?", options: ["Garis Weber", "Garis Wallace", "Garis Lydekker"], a: "Garis Weber" },
+            { id: 161, q: "Kota Palembang yang sangat melekat dengan ikon Jembatan Amperanya, dibelah oleh Sungai?", options: ["Musi", "Batanghari", "Sengatta"], a: "Musi" },
+            { id: 162, q: "Danau Singkarak yang setiap tahunnya menjadi rute ajang balap sepeda internasional (Tour de Singkarak) terletak di?", options: ["Sumatera Barat", "Sumatera Utara", "Riau"], a: "Sumatera Barat" },
+            { id: 163, q: "Gunung Bromo yang pesona kaldera pasirnya sangat diincar wisatawan mancanegara berada di provinsi?", options: ["Jawa Timur", "Jawa Tengah", "Bali"], a: "Jawa Timur" },
+            { id: 164, q: "Pusat pemerintahan (Ibu Kota) dari Provinsi Papua yang terletak di ujung timur teluk adalah kota?", options: ["Jayapura", "Manokwari", "Sorong"], a: "Jayapura" },
+            { id: 165, q: "Di ujung utaranya, Kepulauan Miangas Provinsi Sulawesi Utara berbatasan perairan langsung dengan negara?", options: ["Filipina", "Malaysia", "Timor Leste"], a: "Filipina" },
+            { id: 166, q: "Taman Nasional Tanjung Puting di pesisir Kalimantan Tengah sangat dilindungi karena merupakan pusat rehabilitasi liar bagi satwa?", options: ["Orangutan", "Bekantan", "Gajah Pygmy"], a: "Orangutan" },
+            { id: 167, q: "Jika ditinjau dari luas daratannya, provinsi manakah yang memegang predikat provinsi terkecil di Indonesia?", options: ["DKI Jakarta", "DI Yogyakarta", "Banten"], a: "DKI Jakarta" },
+            { id: 168, q: "Suku Asmat yang ahli mengukir kayu dan Suku Dani yang memiliki tradisi mumi, keduanya berasal dari pulau?", options: ["Papua", "Kalimantan", "Nias"], a: "Papua" },
+            { id: 169, q: "Candi Prambanan dibangun sebagai persembahan untuk Trimurti (Siwa, Brahma, Wisnu) pada era keemasan kerajaan Hindu, yaitu?", options: ["Mataram Kuno", "Majapahit", "Singasari"], a: "Mataram Kuno" },
+            { id: 170, q: "Situs arkeologi Candi Prambanan letaknya berada persis membelah batas administrasi provinsi Jawa Tengah dan?", options: ["DI Yogyakarta", "Jawa Timur", "Jawa Barat"], a: "DI Yogyakarta" },
+            { id: 171, q: "Jajaran punggung pegunungan vulkanik yang membentang dari Aceh hingga Lampung di ujung selatan pulau dinamakan?", options: ["Pegunungan Bukit Barisan", "Pegunungan Dieng", "Pegunungan Schwaner"], a: "Pegunungan Bukit Barisan" },
+            { id: 172, q: "Satu-satunya kota di Indonesia yang secara resmi dijuluki 'Kota Pahlawan' atas pertahanan heroik militannya adalah?", options: ["Surabaya", "Jakarta", "Bandung"], a: "Surabaya" },
+            { id: 173, q: "Berkat sejarah masuknya Islam pertama dan syariatnya, provinsi Nanggroe Aceh Darussalam sangat lekat dengan julukan istimewa?", options: ["Serambi Mekah", "Serambi Madinah", "Bumi Para Wali"], a: "Serambi Mekah" },
+            { id: 174, q: "Kota bersejarah di Jawa Tengah bagian selatan ini tidak hanya dijuluki 'Kota Gudeg', tetapi juga 'Kota Pelajar', yaitu?", options: ["Yogyakarta", "Solo", "Semarang"], a: "Yogyakarta" },
+            { id: 175, q: "Mengingat tingginya intensitas curah hujan bahkan saat musim kemarau, kota Bogor di Jawa Barat mendapat julukan sebagai?", options: ["Kota Hujan", "Kota Kembang", "Kota Angin"], a: "Kota Hujan" },
+
+            // Budaya, Flora & Fauna 2 (176-200)
+            { id: 176, q: "Pakaian adat kuno khas wanita bersiluet longgar transparan yang biasa dipakai di Sulawesi Selatan (terutama suku Bugis) dinamakan?", options: ["Baju Bodo", "Kebaya", "Ulos"], a: "Baju Bodo" },
+            { id: 177, q: "Kain tenun yang selalu dihadirkan dalam kelahiran, perkawinan, maupun kematian pada adat masyarakat Batak disebut?", options: ["Ulos", "Songket", "Sasirangan"], a: "Ulos" },
+            { id: 178, q: "Seni topeng raksasa berkepala singa yang ditunggangi bulu merak (Dadap Merak) merupakan tarian kesenian asli kota?", options: ["Ponorogo", "Banyuwangi", "Madiun"], a: "Ponorogo" },
+            { id: 179, q: "Tari Legong merupakan tarian keraton yang ditarikan oleh beberapa gadis mengenakan kipas atau hiasan mahkota emas, khas dari?", options: ["Bali", "Jawa Timur", "Sunda"], a: "Bali" },
+            { id: 180, q: "Senjata tajam melengkung berukuran pendek mirip arit yang digunakan masyarakat petani hingga perlindungan diri di Jawa Timur adalah?", options: ["Celurit (Madura)", "Kujang", "Rencong"], a: "Celurit (Madura)" },
+            { id: 181, q: "Bunga Bangkai raksasa yang menjadi ikon Kebun Raya Bogor dan endemik asli pegunungan Sumatera bernama latin?", options: ["Amorphophallus titanum", "Rafflesia arnoldii", "Phalaenopsis amabilis"], a: "Amorphophallus titanum" },
+            { id: 182, q: "Tari perang kelincahan dengan properti mandau dan perisai yang menceritakan kegagahan suku Dayak disebut tari?", options: ["Kancet Papatai", "Tari Sajojo", "Tari Piring"], a: "Kancet Papatai" },
+            { id: 183, q: "Tifa merupakan alat musik tabuh dari sebatang kayu berongga yang ditutupi kulit rusa. Instrumen ini khas dari daerah?", options: ["Papua dan Maluku", "Sulawesi dan NTT", "Bali dan Lombok"], a: "Papua dan Maluku" },
+            { id: 184, q: "Dari ratusan bahasa daerah, bahasa dengan penutur asli terbanyak di wilayah teritorial Indonesia adalah?", options: ["Bahasa Jawa", "Bahasa Sunda", "Bahasa Madura"], a: "Bahasa Jawa" },
+            { id: 185, q: "Candi Borobudur didirikan sebagai monumen suci oleh Dinasti/Wangsa pemeluk Buddha Mahayana, yakni?", options: ["Syailendra", "Sanjaya", "Isyana"], a: "Syailendra" },
+            { id: 186, q: "Rumah Panjang yang dapat dihuni puluhan keluarga dan dibuat tinggi dari tanah di pedalaman Kalimantan dinamakan Rumah?", options: ["Betang / Radakng", "Limas", "Gadang"], a: "Betang / Radakng" },
+            { id: 187, q: "Tari Merak yang memperlihatkan keindahan kepakan sayap burung merak melalui kostumnya adalah tarian kontemporer budaya?", options: ["Sunda (Jawa Barat)", "Jawa Tengah", "Banten"], a: "Sunda (Jawa Barat)" },
+            { id: 188, q: "Pertunjukan magis para ksatria menunggang kuda anyaman bambu (sering mengalami kesurupan) dinamakan Kuda Lumping, peninggalan budaya?", options: ["Jawa", "Bali", "Betawi"], a: "Jawa" },
+            { id: 189, q: "Masyarakat etnis sub-Sunda yang teguh menolak modernisasi dan bermukim di pedalaman Pegunungan Kendeng, Banten adalah suku?", options: ["Baduy", "Tengger", "Samin"], a: "Baduy" },
+            { id: 190, q: "Senjata tikam berbilah tunggal asimetris yang diselipkan di pinggang sebagai simbol kehormatan pria di Sulawesi Selatan disebut?", options: ["Badik", "Keris", "Mandau"], a: "Badik" },
+            { id: 191, q: "Kain dengan motif lingkaran putih kecil-kecil yang dibuat dengan mengikat kelereng/koin pada kain sebelum dicelup warna disebut Batik?", options: ["Jumputan (Ikat Celup)", "Cap", "Tulis Malam"], a: "Jumputan (Ikat Celup)" },
+            { id: 192, q: "Festival tarik-menarik dan berpelukan pemuda-pemudi yang hanya diadakan sehari sesudah perayaan Nyepi di Banjar Kaja Sesetan ada di provinsi?", options: ["Bali", "Lombok", "Jawa Timur"], a: "Bali" },
+            { id: 193, q: "Kain Songket indah dari benang emas dan sutra yang menjadi kebanggaan kaum perempuan pesisir Palembang berasal dari budaya era kerajaan?", options: ["Sriwijaya", "Malayu", "Pagaruyung"], a: "Sriwijaya" },
+            { id: 194, q: "Burung Enggang (Rangkong Gading) yang paruhnya sering dijadikan ukiran dan lambang kepemimpinan, amat disucikan oleh etnis Nusantara, yakni suku?", options: ["Dayak", "Asmat", "Mentawai"], a: "Dayak" },
+            { id: 195, q: "Varanus komodoensis, atau naga endemik Kepulauan Sunda Kecil yang dilindungi taman nasional, pada taksonominya adalah karnivora famili kadal atau?", options: ["Biawak raksasa", "Buaya", "Iguana raksasa"], a: "Biawak raksasa" },
+            { id: 196, q: "Karena bentuk bunganya yang memikat, Anggrek Bulan oleh Keputusan Presiden (1990) dinobatkan sebagai bunga perlambang, yaitu?", options: ["Puspa Pesona", "Puspa Langka", "Puspa Hias"], a: "Puspa Pesona" },
+            { id: 197, q: "Pohon endemik hutan tropis yang kayunya amat kuat tahan air tawar (sehingga disebut Kayu Besi/Ulin) adalah identitas asli pulau raksasa?", options: ["Kalimantan", "Jawa", "Papua"], a: "Kalimantan" },
+            { id: 198, q: "Masyarakat petani Hindu di dataran tinggi yang setiap tahunnya melarung sesajen di kawah Gunung Bromo adalah sub-etnis Jawa yang disebut Suku?", options: ["Tengger", "Baduy", "Osing"], a: "Tengger" },
+            { id: 199, q: "Gamelan yang memiliki tangga nada khusus (Pelog dan Slendro pelog) yang mengalun harmonis di tanah Parahyangan dikenal sebagai Gamelan?", options: ["Degung", "Gong Kebyar", "Rindik"], a: "Degung" },
+            { id: 200, q: "Tari Kecak dari Bali dikenal unik karena tidak diiringi alat musik konvensional, melainkan diiringi oleh?", options: ["Paduan suara mulut puluhan pria", "Tepukan tangan penari wanita", "Pukulan gendang bambu"], a: "Paduan suara mulut puluhan pria" }
+        ];
+        
+        let currentActiveQuestions = [];
+        const COOLDOWN_HOURS = 48;
+
+        // --- MOBILE MENU LOGIC ---
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobile-menu');
+            menu.classList.toggle('hidden');
+        }
+
+        // --- LOGIC KUIS & COOLDOWN ---
+        function checkAndOpenQuiz() {
+            const lastAttempt = localStorage.getItem('crosantara_quiz_last_attempt');
+            const modal = document.getElementById('quiz-modal');
+            const content = document.getElementById('quiz-content');
+
+            document.getElementById('quiz-form-container').classList.add('hidden');
+            document.getElementById('quiz-blocked').classList.add('hidden');
+            document.getElementById('quiz-success').classList.add('hidden');
+            document.getElementById('quiz-fail').classList.add('hidden');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+
+            if (lastAttempt) {
+                const now = new Date().getTime();
+                const diff = now - parseInt(lastAttempt);
+                const hoursPassed = diff / (1000 * 60 * 60);
+
+                if (hoursPassed < COOLDOWN_HOURS) {
+                    showBlockedState(lastAttempt);
+                    return;
+                }
+            }
+
+            generateRandomQuestions();
+            document.getElementById('quiz-form-container').classList.remove('hidden');
+        }
+
+        function generateRandomQuestions() {
+            const shuffled = [...questionBank].sort(() => 0.5 - Math.random());
+            currentActiveQuestions = shuffled.slice(0, 3);
+            
+            const wrapper = document.getElementById('questions-wrapper');
+            wrapper.innerHTML = '';
+
+            currentActiveQuestions.forEach((item, index) => {
+                const div = document.createElement('div');
+                div.className = "pb-6 border-b border-stone-100 last:border-0";
+                div.innerHTML = `
+                    <p class="font-bold text-brand-dark mb-4 text-base font-serif flex gap-2">
+                        <span class="text-brand-gold">${index + 1}.</span> ${item.q}
+                    </p>
+                    <div class="space-y-3">
+                        ${item.options.map(opt => `
+                            <label class="flex items-center gap-4 p-3 border-2 border-transparent bg-stone-50 hover:bg-white hover:border-brand-brown/30 transition cursor-pointer group rounded-lg">
+                                <div class="relative flex items-center justify-center w-5 h-5">
+                                    <input type="radio" name="q${item.id}" value="${opt}" class="peer appearance-none w-5 h-5 border-2 border-stone-300 rounded-full checked:border-brand-brown checked:bg-brand-brown transition" required>
+                                    <div class="absolute w-2 h-2 bg-white rounded-full opacity-0 peer-checked:opacity-100 transition"></div>
+                                </div>
+                                <span class="text-sm text-stone-600 group-hover:text-brand-dark transition font-medium">${opt}</span>
+                            </label>
+                        `).join('')}
+                    </div>
+                `;
+                wrapper.appendChild(div);
+            });
+        }
+
+        function submitQuiz(e) {
+            e.preventDefault();
+            const formData = new FormData(e.target);
+            let allCorrect = true;
+            currentActiveQuestions.forEach(item => { if (formData.get(`q${item.id}`) !== item.a) allCorrect = false; });
+
+            document.getElementById('quiz-form-container').classList.add('hidden');
+            localStorage.setItem('crosantara_quiz_last_attempt', new Date().getTime().toString());
+
+            if (allCorrect) {
+                // LOGIC PENARIKAN VOUCHER DINAMIS
+                let ownedVouchers = JSON.parse(localStorage.getItem('crosantara_vouchers') || '[]');
+                
+                // Cari kode yang belum pernah didapat
+                let availableCodes = VOUCHER_CODES.filter(code => !ownedVouchers.some(v => v.code === code));
+                
+                // Fallback jika anehnya user sudah menang 100 kali (400 hari)
+                if(availableCodes.length === 0) availableCodes = ["SUPERWIN50"]; 
+                
+                // Pilih acak 1 kode
+                const randomCode = availableCodes[Math.floor(Math.random() * availableCodes.length)];
+                
+                // Simpan kode yang baru dimenangkan dengan status used = false
+                ownedVouchers.push({ code: randomCode, used: false });
+                localStorage.setItem('crosantara_vouchers', JSON.stringify(ownedVouchers));
+
+                // Tampilkan ke UI
+                document.getElementById('won-voucher-display').innerText = randomCode;
+
+                document.getElementById('quiz-success').classList.remove('hidden');
+                confetti({ particleCount: 200, spread: 80, origin: { y: 0.6 }, colors: ['#D4AF37', '#5D4037', '#ffffff'] });
+            } else {
+                document.getElementById('quiz-fail').classList.remove('hidden');
+            }
+        }
+
+        function showBlockedState(lastTimestamp) {
+            document.getElementById('quiz-blocked').classList.remove('hidden');
+            const timerEl = document.getElementById('countdown-timer');
+            const targetTime = parseInt(lastTimestamp) + (COOLDOWN_HOURS * 60 * 60 * 1000);
+            const updateTimer = () => {
+                const now = new Date().getTime();
+                const distance = targetTime - now;
+                if (distance < 0) { timerEl.innerText = "Sekarang!"; return; }
+                const hours = Math.floor(distance / (1000 * 60 * 60));
+                const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+                timerEl.innerText = `${hours} Jam ${minutes} Menit ${seconds} Detik`;
+            };
+            updateTimer();
+            if (window.quizTimerInterval) clearInterval(window.quizTimerInterval);
+            window.quizTimerInterval = setInterval(updateTimer, 1000);
+        }
+
+        function closeQuiz() {
+            const modal = document.getElementById('quiz-modal');
+            const content = document.getElementById('quiz-content');
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+            setTimeout(() => { modal.classList.add('hidden'); document.getElementById('quiz-form').reset(); }, 300);
+        }
+
+        // --- CART & SYSTEM ---
+        let cart = [];
+        let isDiscountApplied = false;
+        let appliedVoucherCode = null; // Menyimpan kode mana yang sedang aktif di cart
+
+        function addToCart(name, price, image) {
+            const existingItem = cart.find(item => item.name === name);
+            if (existingItem) existingItem.qty++; else cart.push({ name, price, image, qty: 1 });
+            updateCartUI();
+            showToast();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(item => item.name !== name);
+            if(cart.length === 0) resetDiscount();
+            updateCartUI();
+        }
+
+        function applyDiscount() {
+            const codeInput = document.getElementById('discount-code').value.toUpperCase().trim();
+            const msgEl = document.getElementById('discount-msg');
+            
+            // Mengambil database voucher milik user
+            let ownedVouchers = JSON.parse(localStorage.getItem('crosantara_vouchers') || '[]');
+            const voucher = ownedVouchers.find(v => v.code === codeInput);
+
+            msgEl.classList.remove('hidden');
+
+            if (voucher && !voucher.used) {
+                isDiscountApplied = true;
+                appliedVoucherCode = codeInput;
+                msgEl.innerHTML = `<i data-lucide="check-circle" class="w-3 h-3"></i> Kode valid! Diskon 50% aktif.`;
+                msgEl.className = "text-xs mt-2 text-klepon-green font-bold flex items-center gap-1";
+                confetti({ particleCount: 40, spread: 50, origin: { x: 0.9, y: 0.8 }, colors: ['#D4AF37'] });
+            } else if (voucher && voucher.used) {
+                isDiscountApplied = false;
+                appliedVoucherCode = null;
+                msgEl.innerHTML = `<i data-lucide="alert-circle" class="w-3 h-3"></i> Kode sudah pernah digunakan / kedaluwarsa.`;
+                msgEl.className = "text-xs mt-2 text-rica-red flex items-center gap-1";
+            } else {
+                isDiscountApplied = false;
+                appliedVoucherCode = null;
+                msgEl.innerHTML = `<i data-lucide="alert-circle" class="w-3 h-3"></i> Kode tidak valid atau belum didapatkan.`;
+                msgEl.className = "text-xs mt-2 text-rica-red flex items-center gap-1";
+            }
+            
+            lucide.createIcons();
+            updateCartUI();
+        }
+
+        function resetDiscount() {
+            isDiscountApplied = false;
+            appliedVoucherCode = null;
+            document.getElementById('discount-code').value = '';
+            document.getElementById('discount-msg').classList.add('hidden');
+        }
+
+        function updateCartUI() {
+            const badge = document.getElementById('cart-badge');
+            const mobileBadge = document.getElementById('mobile-cart-badge');
+            const bottomBar = document.getElementById('bottom-cart-bar');
+            
+            const totalQty = cart.reduce((sum, item) => sum + item.qty, 0);
+            
+            if (totalQty > 0) {
+                badge.innerText = totalQty; badge.classList.remove('hidden');
+                mobileBadge.innerText = totalQty; mobileBadge.classList.remove('hidden');
+                bottomBar.classList.remove('hidden'); setTimeout(() => bottomBar.classList.remove('translate-y-full'), 10);
+            } else {
+                badge.classList.add('hidden'); mobileBadge.classList.add('hidden');
+                bottomBar.classList.add('translate-y-full'); setTimeout(() => bottomBar.classList.add('hidden'), 300);
+            }
+
+            const cartList = document.getElementById('cart-items');
+            if (cart.length === 0) {
+                cartList.innerHTML = `<div class="text-center py-20 opacity-50"><i data-lucide="shopping-basket" class="w-12 h-12 mx-auto mb-2 text-stone-400"></i><p class="text-stone-500 text-sm font-serif italic">Keranjang kosong.</p></div>`;
+            } else {
+                cartList.innerHTML = cart.map(item => `
+                    <div class="flex gap-4 items-center bg-white p-3 border border-stone-100 shadow-sm relative group">
+                        <img src="${item.image}" class="w-16 h-16 object-cover border border-stone-200">
+                        <div class="flex-1">
+                            <h4 class="font-bold text-brand-dark text-sm font-serif tracking-wide">${item.name}</h4>
+                            <div class="flex justify-between items-center mt-2">
+                                <p class="text-xs text-stone-500 font-medium">Rp ${item.price.toLocaleString('id-ID')} x ${item.qty}</p>
+                                <p class="text-xs font-bold text-brand-brown">Rp ${(item.price * item.qty).toLocaleString('id-ID')}</p>
+                            </div>
+                        </div>
+                        <button onclick="removeFromCart('${item.name}')" class="absolute -top-2 -right-2 bg-stone-200 hover:bg-rica-red hover:text-white text-stone-500 rounded-full p-1 opacity-100 transition shadow-md"><i data-lucide="x" class="w-3 h-3"></i></button>
+                    </div>
+                `).join('');
+            }
+            lucide.createIcons();
+
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            const discount = isDiscountApplied ? subtotal * 0.5 : 0;
+            const total = subtotal - discount;
+
+            document.getElementById('cart-subtotal').innerText = "Rp " + subtotal.toLocaleString('id-ID');
+            const discRow = document.getElementById('discount-row');
+            if (isDiscountApplied && subtotal > 0) {
+                discRow.classList.remove('hidden');
+                document.getElementById('discount-amount').innerText = "-Rp " + discount.toLocaleString('id-ID');
+            } else {
+                discRow.classList.add('hidden');
+            }
+            
+            const totalFormatted = "Rp " + total.toLocaleString('id-ID');
+            document.getElementById('cart-total').innerText = totalFormatted;
+            document.getElementById('bottom-bar-total').innerText = totalFormatted;
+            document.getElementById('bottom-bar-count').innerText = `${totalQty} Item`;
+        }
+
+        function checkout() {
+            if (cart.length === 0) return;
+            let message = "Salam Crosantara! Saya ingin memesan:\n\n";
+            cart.forEach(item => message += `• ${item.name} (${item.qty}x)\n`);
+            
+            const subtotal = cart.reduce((sum, item) => sum + (item.price * item.qty), 0);
+            
+            if (isDiscountApplied && appliedVoucherCode) {
+                message += `\nSubtotal: Rp ${subtotal.toLocaleString('id-ID')}`;
+                message += `\nDiskon 50% (${appliedVoucherCode}): -Rp ${(subtotal * 0.5).toLocaleString('id-ID')}`;
+                message += `\n*Total Bayar: Rp ${(subtotal * 0.5).toLocaleString('id-ID')}*`;
+
+                // TANDAI VOUCHER SEBAGAI "SUDAH DIPAKAI" SETELAH CHECKOUT
+                let ownedVouchers = JSON.parse(localStorage.getItem('crosantara_vouchers') || '[]');
+                let vIndex = ownedVouchers.findIndex(v => v.code === appliedVoucherCode);
+                if (vIndex > -1) {
+                    ownedVouchers[vIndex].used = true;
+                    localStorage.setItem('crosantara_vouchers', JSON.stringify(ownedVouchers));
+                }
+            } else {
+                message += `\n*Total Bayar: Rp ${subtotal.toLocaleString('id-ID')}*`;
+            }
+            
+            // Buka WhatsApp
+            window.open(`https://wa.me/6281222667836?text=${encodeURIComponent(message)}`, '_blank');
+            
+            // Reset state cart dan discount setelah sukses redirect ke WA
+            cart = [];
+            resetDiscount();
+            updateCartUI();
+            toggleCart(); // Tutup panel
+        }
+
+        function copyCode() {
+            const codeToCopy = document.getElementById('won-voucher-display').innerText;
+            navigator.clipboard.writeText(codeToCopy);
+            alert("Kode voucher disalin: " + codeToCopy);
+        }
+
+        function closeQuizAndShop() {
+            closeQuiz();
+            document.getElementById('menu').scrollIntoView();
+        }
+
+        function toggleCart() {
+            const sidebar = document.getElementById('cart-sidebar');
+            const panel = document.getElementById('cart-panel');
+            if (sidebar.classList.contains('hidden')) {
+                sidebar.classList.remove('hidden');
+                setTimeout(() => panel.classList.remove('translate-x-full'), 10);
+            } else {
+                panel.classList.add('translate-x-full');
+                setTimeout(() => sidebar.classList.add('hidden'), 300);
+            }
+        }
+
+        function showToast() {
+            const toast = document.getElementById('toast');
+            toast.classList.remove('translate-y-48');
+            setTimeout(() => toast.classList.add('translate-y-48'), 3000);
+        }
+
+        lucide.createIcons();
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-md');
+                nav.style.top = '0';
+            } else {
+                nav.classList.remove('shadow-md');
+                nav.style.top = '12px';
+            }
+        });
+    </script>
+</body>
+</html>
