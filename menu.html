@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Crosantara | Warisan Rasa Nusantara</title>
+    <title>Menu | Crosantara</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -26,8 +26,9 @@
 <body class="font-sans text-stone-800 antialiased selection:bg-brand-brown selection:text-brand-gold flex flex-col min-h-screen bg-brand-cream overflow-x-hidden">
 
     <!-- ================= BAGIAN HEADER MULAI ================= -->
+    <div class="h-3 w-full pattern-batik-cap fixed top-0 z-50 shadow-md border-b border-brand-gold/50"></div>
 
-    <nav class="fixed w-full z-40 top-0 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-lg border-b border-brand-brown/10" id="navbar">
+    <nav class="fixed w-full z-40 top-3 transition-all duration-300 bg-white/95 backdrop-blur-md shadow-lg border-b border-brand-brown/10" id="navbar">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16 md:h-20">
                 <a href="index.html" class="flex items-center gap-3 group">
@@ -43,11 +44,11 @@
                 <div class="hidden md:flex space-x-8 items-center">
                     <a href="index.html" class="text-stone-600 hover:text-brand-brown font-medium transition relative group">
                         Beranda
-                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-gold transition-all"></span>
+                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all group-hover:w-full"></span>
                     </a>
                     <a href="menu.html" class="text-stone-600 hover:text-brand-brown font-medium transition relative group">
                         Menu Spesial
-                        <span class="absolute -bottom-1 left-0 w-0 h-0.5 bg-brand-gold transition-all group-hover:w-full"></span>
+                        <span class="absolute -bottom-1 left-0 w-full h-0.5 bg-brand-gold transition-all"></span>
                     </a>
                     
                     <button onclick="checkAndOpenQuiz()" class="px-5 py-2.5 bg-brand-brown text-white border border-brand-brown rounded-none rounded-tr-xl rounded-bl-xl hover:bg-brand-dark hover:shadow-lg transition flex items-center gap-2 group relative overflow-hidden">
@@ -76,8 +77,8 @@
 
         <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-brand-gold/20 absolute w-full shadow-xl">
             <div class="px-4 pt-4 pb-6 space-y-3">
-                <a href="index.html" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-brand-brown bg-brand-cream rounded-lg">Beranda</a>
-                <a href="menu.html" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-brand-brown hover:bg-brand-cream rounded-lg">Menu Spesial</a>
+                <a href="index.html" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-stone-700 hover:text-brand-brown hover:bg-brand-cream rounded-lg">Beranda</a>
+                <a href="menu.html" onclick="toggleMobileMenu()" class="block px-3 py-2 text-base font-medium text-brand-brown bg-brand-cream rounded-lg">Menu Spesial</a>
                 <button onclick="toggleMobileMenu(); checkAndOpenQuiz()" class="w-full text-left px-3 py-2 text-base font-medium text-brand-brown bg-brand-brown/5 rounded-lg flex items-center gap-2">
                     <i data-lucide="brain-circuit" class="w-4 h-4"></i> Tantangan Diskon
                 </button>
@@ -86,146 +87,174 @@
     </nav>
     <!-- ================= BAGIAN HEADER SELESAI ================= -->
 
-    <!-- ================= SECTION 1: HERO (FULLSCREEN) ================= -->
+    <!-- ================= SECTION 1: Intro Menu (FULLSCREEN) ================= -->
     <section id="home" class="h-screen snap-start flex items-center justify-center relative overflow-hidden bg-brand-cream pt-16">
-        <div class="absolute inset-0 z-0 opacity-10 bg-batik-subtle"></div>
-        <div class="absolute top-0 right-0 w-2/3 h-full pattern-kawung opacity-40 mix-blend-multiply pointer-events-none"></div>
+        <div class="absolute inset-0 pattern-kawung opacity-20 pointer-events-none mix-blend-multiply"></div>
+        <div class="max-w-7xl mx-auto px-4 relative z-10 text-center w-full">
+            <span class="text-brand-terracotta font-serif italic text-lg md:text-xl">Pilihan Terbaik</span>
+            <h1 class="text-5xl md:text-7xl lg:text-8xl font-serif font-bold text-brand-dark mt-2 drop-shadow-sm">Menu Andalan<br>Kami</h1>
+            <div class="flex items-center justify-center gap-4 mt-8">
+                <div class="h-[1px] w-16 md:w-24 bg-brand-gold"></div>
+                <div class="w-4 h-4 rotate-45 border-2 border-brand-brown bg-brand-gold"></div>
+                <div class="h-[1px] w-16 md:w-24 bg-brand-gold"></div>
+            </div>
+        </div>
+
+        <!-- Pembatas Ukiran Elegan -->
+        <div class="absolute bottom-0 left-0 w-full z-30 pointer-events-none flex items-center justify-center translate-y-1/2">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold to-transparent"></div>
+            <div class="relative flex items-center justify-center drop-shadow-sm">
+                <svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M80 5 L95 20 L80 35 L65 20 Z" fill="#5D4037" stroke="#D4AF37" stroke-width="2"/>
+                    <path d="M80 12 L88 20 L80 28 L72 20 Z" fill="#D4AF37"/>
+                    <path d="M30 20 C 50 20, 55 5, 70 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M30 20 C 50 20, 55 35, 70 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M130 20 C 110 20, 105 5, 90 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M130 20 C 110 20, 105 35, 90 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="2.5" fill="#D4AF37"/>
+                    <circle cx="10" cy="20" r="1.5" fill="#D4AF37"/>
+                    <circle cx="140" cy="20" r="2.5" fill="#D4AF37"/>
+                    <circle cx="150" cy="20" r="1.5" fill="#D4AF37"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Penanda Corner -->
+        <a href="#menu-klepon" class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-center gap-2 text-brand-brown opacity-60 hover:opacity-100 transition animate-bounce z-20">
+            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Scroll</span>
+            <i data-lucide="arrow-down" class="w-6 h-6 md:w-8 md:h-8"></i>
+        </a>
+    </section>
+
+    <!-- ================= SECTION 2: Klepon (FULLSCREEN) ================= -->
+    <section id="menu-klepon" class="h-screen snap-start flex items-center justify-center relative bg-white px-4 md:px-8 pt-16">
+        <!-- Membungkus card dengan tinggi spesifik agar pas dalam 1 layar -->
+        <div class="w-full max-w-6xl mx-auto h-[82vh] md:h-[75vh] flex items-center justify-center mt-4 relative z-10">
+            
+            <div class="bg-brand-cream group relative flex flex-col md:flex-row shadow-xl hover:shadow-2xl transition-all duration-500 rounded-none border border-brand-gold/30 p-2 md:p-4 gap-4 w-full h-full">
+                <!-- Dekoras Sudut -->
+                <div class="corner-motif corner-tl hidden md:block"></div>
+                <div class="corner-motif corner-tr hidden md:block"></div>
+                <div class="corner-motif corner-bl hidden md:block"></div>
+                <div class="corner-motif corner-br hidden md:block"></div>
+
+                <!-- Bagian Gambar -->
+                <div class="w-full md:w-1/2 h-[45%] md:h-full overflow-hidden relative">
+                    <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-r from-black/80 via-black/20 to-transparent z-10"></div>
+                    <img src="images/WhatsApp Image 2026-03-01 at 00.54.41.jpeg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="Menu Klepon">
+                    <div class="absolute bottom-4 left-4 md:bottom-10 md:left-10 z-20">
+                        <span class="px-2 py-1 md:px-3 bg-klepon-green/90 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest border border-white/20 mb-2 md:mb-3 inline-block shadow-sm">Sensasi Manis</span>
+                        <h3 class="text-2xl md:text-5xl font-serif font-bold text-white mb-1 md:mb-2 drop-shadow-md">Klepon Lumer</h3>
+                        <p class="text-brand-cream/90 text-xs md:text-base font-light italic">Pandan • Gula Aren • Kelapa Sangrai</p>
+                    </div>
+                </div>
+
+                <!-- Bagian Konten & Harga -->
+                <div class="w-full md:w-1/2 h-[55%] md:h-full flex flex-col justify-center bg-white p-4 md:p-10 lg:p-12 border border-brand-gold/20 relative overflow-y-auto hide-scroll">
+                    <div class="mb-4 md:mb-10">
+                        <p class="text-stone-600 leading-relaxed font-light text-sm md:text-lg">Sensasi tradisional yang elegan. Adonan croissant buttery khas Perancis dipadukan dengan lelehan gula aren cair yang legit, dilapisi glaze pandan wangi dan taburan kelapa sangrai.</p>
+                    </div>
+                    
+                    <div class="space-y-3 md:space-y-6">
+                        <!-- Porsi Besar -->
+                        <div class="flex justify-between items-center bg-brand-cream p-3 md:p-5 border-l-4 border-l-brand-brown hover:border-brand-brown/30 transition shadow-sm group/item cursor-pointer">
+                            <div><p class="font-bold text-brand-dark font-serif text-base md:text-xl">Made</p><p class="text-[9px] md:text-xs text-brand-terracotta uppercase tracking-wider mt-0.5 md:mt-1">Porsi Besar</p></div>
+                            <div class="flex items-center gap-3 md:gap-6">
+                                <span class="font-bold text-brand-dark text-base md:text-xl">Rp 18.000</span>
+                                <button onclick="addToCart('Klepon Made', 18000, 'images/WhatsApp Image 2026-03-01 at 00.54.41.jpeg')" class="w-10 h-10 md:w-12 md:h-12 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full z-10 bg-white shadow-sm group-hover/item:scale-110"><i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                            </div>
+                        </div>
+                        <!-- Porsi Kecil -->
+                        <div class="flex justify-between items-center bg-brand-cream p-3 md:p-5 border-l-4 border-l-stone-300 hover:border-brand-brown/30 transition shadow-sm group/item cursor-pointer">
+                            <div><p class="font-bold text-brand-dark font-serif text-base md:text-xl">Macil</p><p class="text-[9px] md:text-xs text-stone-500 uppercase tracking-wider mt-0.5 md:mt-1">Porsi Kecil</p></div>
+                            <div class="flex items-center gap-3 md:gap-6">
+                                <span class="font-bold text-brand-dark text-base md:text-xl">Rp 5.000</span>
+                                <button onclick="addToCart('Klepon Macil', 5000, 'images/WhatsApp Image 2026-03-01 at 00.54.41.jpeg')" class="w-10 h-10 md:w-12 md:h-12 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full z-10 bg-white shadow-sm group-hover/item:scale-110"><i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Pembatas Ukiran Elegan -->
+        <div class="absolute bottom-0 left-0 w-full z-30 pointer-events-none flex items-center justify-center translate-y-1/2">
+            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold to-transparent"></div>
+            <div class="relative flex items-center justify-center drop-shadow-sm">
+                <svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M80 5 L95 20 L80 35 L65 20 Z" fill="#5D4037" stroke="#D4AF37" stroke-width="2"/>
+                    <path d="M80 12 L88 20 L80 28 L72 20 Z" fill="#D4AF37"/>
+                    <path d="M30 20 C 50 20, 55 5, 70 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M30 20 C 50 20, 55 35, 70 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M130 20 C 110 20, 105 5, 90 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <path d="M130 20 C 110 20, 105 35, 90 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                    <circle cx="20" cy="20" r="2.5" fill="#D4AF37"/>
+                    <circle cx="10" cy="20" r="1.5" fill="#D4AF37"/>
+                    <circle cx="140" cy="20" r="2.5" fill="#D4AF37"/>
+                    <circle cx="150" cy="20" r="1.5" fill="#D4AF37"/>
+                </svg>
+            </div>
+        </div>
+
+        <!-- Penanda Corner -->
+        <a href="#menu-rica" class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-center gap-2 text-brand-brown opacity-60 hover:opacity-100 transition animate-bounce z-20">
+            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Selanjutnya</span>
+            <i data-lucide="arrow-down" class="w-6 h-6 md:w-8 md:h-8"></i>
+        </a>
+    </section>
+
+    <!-- ================= SECTION 3: Rica-Rica (FULLSCREEN) ================= -->
+    <section id="menu-rica" class="h-screen snap-start flex items-center justify-center relative bg-brand-cream px-4 md:px-8 pt-16">
+        <div class="absolute inset-0 pattern-batik-cap opacity-[0.03] pointer-events-none mix-blend-multiply"></div>
         
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-12 items-center">
-                <div class="space-y-4 lg:space-y-8 text-center lg:text-left relative">
-                    <div class="hidden lg:block absolute -left-12 top-0 w-1 h-32 bg-gradient-to-b from-brand-gold to-transparent"></div>
-                    
-                    <div class="inline-flex items-center gap-2 px-4 py-1.5 bg-brand-brown/5 border border-brand-brown/20 rounded-full mt-4 lg:mt-0">
-                        <span class="w-2 h-2 rounded-full bg-brand-terracotta"></span>
-                        <span class="text-brand-brown text-xs font-bold tracking-widest uppercase">Authentic Indonesian Fusion</span>
+        <div class="w-full max-w-6xl mx-auto h-[82vh] md:h-[75vh] flex items-center justify-center relative z-10 mt-4">
+            
+            <div class="bg-white group relative flex flex-col md:flex-row shadow-xl hover:shadow-2xl transition-all duration-500 rounded-none border border-brand-gold/30 p-2 md:p-4 gap-4 w-full h-full">
+                <!-- Dekoras Sudut -->
+                <div class="corner-motif corner-tl hidden md:block"></div>
+                <div class="corner-motif corner-tr hidden md:block"></div>
+                <div class="corner-motif corner-bl hidden md:block"></div>
+                <div class="corner-motif corner-br hidden md:block"></div>
+
+                <!-- Bagian Konten & Harga (Di sebelah Kiri pada Desktop) -->
+                <div class="w-full md:w-1/2 h-[55%] md:h-full flex flex-col justify-center bg-brand-cream p-4 md:p-10 lg:p-12 border border-brand-gold/20 relative order-2 md:order-1 overflow-y-auto hide-scroll">
+                    <div class="mb-4 md:mb-10">
+                        <p class="text-stone-600 leading-relaxed font-light text-sm md:text-lg">Eksotisme Manado dalam satu gigitan. Suwiran ayam lembut yang dimasak perlahan dengan bumbu rica-rica pedas aromatik, bersembunyi di dalam lapisan croissant yang renyah dan gurih.</p>
                     </div>
                     
-                    <h1 class="text-4xl md:text-5xl lg:text-7xl font-serif font-bold text-brand-dark leading-tight text-shadow-sm">
-                        Warisan Rasa <br>
-                        <span class="relative inline-block text-brand-terracotta">
-                            Nusantara
-                            <svg class="absolute -bottom-2 w-full h-3 text-brand-gold" viewBox="0 0 100 10" preserveAspectRatio="none">
-                                <path d="M0 5 Q 50 10 100 5" stroke="currentColor" stroke-width="2" fill="none" />
-                            </svg>
-                        </span>
-                        <span class="block text-2xl md:text-4xl lg:text-5xl mt-2 text-stone-600 font-normal italic">Dalam Lipatan.</span>
-                    </h1>
-                    
-                    <p class="text-sm md:text-lg text-stone-600 max-w-lg mx-auto lg:mx-0 leading-relaxed font-light hidden md:block">
-                        Perpaduan mahakarya kuliner Eropa dengan kekayaan rempah Ibu Pertiwi. Hadirkan sensasi <strong class="text-brand-brown">Klepon Lumer</strong> dan <strong class="text-brand-terracotta">Ayam Rica-rica</strong>.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-3 justify-center lg:justify-start pt-2">
-                        <a href="menu.html" class="px-6 py-3 md:py-4 md:px-8 bg-brand-brown text-white font-semibold shadow-xl hover:bg-brand-dark transition rounded-tr-2xl rounded-bl-2xl">
-                            Pesan Sekarang
-                        </a>
-                        <button onclick="checkAndOpenQuiz()" class="px-6 py-3 md:py-4 md:px-8 bg-transparent text-brand-brown border-2 border-brand-brown/20 font-semibold hover:bg-brand-brown/5 transition rounded-tl-2xl rounded-br-2xl flex items-center justify-center gap-2">
-                            <i data-lucide="percent" class="w-5 h-5"></i> Coba Diskon
-                        </button>
+                    <div class="space-y-3 md:space-y-6">
+                        <!-- Porsi Besar -->
+                        <div class="flex justify-between items-center bg-white p-3 md:p-5 border-l-4 border-l-brand-brown hover:border-brand-brown/30 transition shadow-sm group/item cursor-pointer">
+                            <div><p class="font-bold text-brand-dark font-serif text-base md:text-xl">Ade</p><p class="text-[9px] md:text-xs text-brand-terracotta uppercase tracking-wider mt-0.5 md:mt-1">Porsi Besar</p></div>
+                            <div class="flex items-center gap-3 md:gap-6">
+                                <span class="font-bold text-brand-dark text-base md:text-xl">Rp 20.000</span>
+                                <button onclick="addToCart('Rica Ade', 20000, 'images/WhatsApp Image 2026-03-01 at 00.54.40.jpeg')" class="w-10 h-10 md:w-12 md:h-12 border border-brand-brown text-brand-brown flex items-center justify-center hover:bg-brand-brown hover:text-white transition rounded-full z-10 bg-brand-cream shadow-sm group-hover/item:scale-110"><i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                            </div>
+                        </div>
+                        <!-- Porsi Kecil -->
+                        <div class="flex justify-between items-center bg-white p-3 md:p-5 border-l-4 border-l-stone-300 hover:border-brand-brown/30 transition shadow-sm group/item cursor-pointer">
+                            <div><p class="font-bold text-brand-dark font-serif text-base md:text-xl">Acil</p><p class="text-[9px] md:text-xs text-stone-500 uppercase tracking-wider mt-0.5 md:mt-1">Porsi Kecil</p></div>
+                            <div class="flex items-center gap-3 md:gap-6">
+                                <span class="font-bold text-brand-dark text-base md:text-xl">Rp 6.000</span>
+                                <button onclick="addToCart('Rica Acil', 6000, 'images/WhatsApp Image 2026-03-01 at 00.54.40.jpeg')" class="w-10 h-10 md:w-12 md:h-12 border border-stone-400 text-stone-500 flex items-center justify-center hover:bg-brand-brown hover:border-brand-brown hover:text-white transition rounded-full z-10 bg-brand-cream shadow-sm group-hover/item:scale-110"><i data-lucide="shopping-bag" class="w-4 h-4 md:w-5 md:h-5"></i></button>
+                            </div>
+                        </div>
                     </div>
                 </div>
-                
-                <div class="relative group perspective-1000 mt-2 lg:mt-0 flex items-center justify-center">
-                    <div class="absolute inset-0 bg-brand-gold/20 transform rotate-3 rounded-3xl scale-95 blur-sm transition-transform duration-700 group-hover:rotate-6 group-hover:scale-100"></div>
-                    <div class="relative grid grid-cols-2 gap-3 p-3 bg-white/50 backdrop-blur-sm border border-white/50 rounded-3xl shadow-2xl w-full max-w-sm lg:max-w-full">
-                        <div class="corner-motif corner-tl"></div><div class="corner-motif corner-tr"></div>
-                        <div class="corner-motif corner-bl"></div><div class="corner-motif corner-br"></div>
-                        <!-- Animasi Foto Diperbarui -->
-                        <img src="images/WhatsApp Image 2026-03-01 at 00.54.41.jpeg" class="rounded-xl shadow-md cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:scale-105 hover:shadow-xl relative z-10 hover:z-20 object-cover h-32 md:h-64 w-full" alt="Croissant Klepon">
-                        <img src="images/WhatsApp Image 2026-03-01 at 00.54.40.jpeg" class="rounded-xl shadow-md cursor-pointer transition-all duration-500 hover:-translate-y-3 hover:scale-105 hover:shadow-xl relative z-10 hover:z-20 object-cover h-32 md:h-64 w-full" alt="Croissant Rica">
+
+                <!-- Bagian Gambar (Di sebelah Kanan pada Desktop) -->
+                <div class="w-full md:w-1/2 h-[45%] md:h-full overflow-hidden relative order-1 md:order-2">
+                    <div class="absolute inset-0 bg-gradient-to-t md:bg-gradient-to-l from-black/80 via-black/20 to-transparent z-10"></div>
+                    <img src="images/WhatsApp Image 2026-03-01 at 00.54.40.jpeg" class="w-full h-full object-cover transition duration-1000 group-hover:scale-105" alt="Menu Rica">
+                    <div class="absolute bottom-4 right-4 md:bottom-10 md:right-10 z-20 text-right">
+                        <span class="px-2 py-1 md:px-3 bg-rica-red/90 text-white text-[10px] md:text-xs font-bold uppercase tracking-widest border border-white/20 mb-2 md:mb-3 inline-block shadow-sm">Sensasi Pedas</span>
+                        <h3 class="text-2xl md:text-5xl font-serif font-bold text-white mb-1 md:mb-2 drop-shadow-md">Rica Membara</h3>
+                        <p class="text-brand-cream/90 text-xs md:text-base font-light italic">Ayam Suwir • Bumbu Pedas • Kemangi</p>
                     </div>
                 </div>
             </div>
-        </div>
 
-        <!-- Pembatas Ukiran Elegan -->
-        <div class="absolute bottom-0 left-0 w-full z-30 pointer-events-none flex items-center justify-center translate-y-1/2">
-            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold to-transparent"></div>
-            <div class="relative flex items-center justify-center drop-shadow-sm">
-                <svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <!-- Diamond Tengah -->
-                    <path d="M80 5 L95 20 L80 35 L65 20 Z" fill="#5D4037" stroke="#D4AF37" stroke-width="2"/>
-                    <path d="M80 12 L88 20 L80 28 L72 20 Z" fill="#D4AF37"/>
-                    <!-- Ukiran Kiri -->
-                    <path d="M30 20 C 50 20, 55 5, 70 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M30 20 C 50 20, 55 35, 70 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <!-- Ukiran Kanan -->
-                    <path d="M130 20 C 110 20, 105 5, 90 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M130 20 C 110 20, 105 35, 90 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <!-- Titik-titik -->
-                    <circle cx="20" cy="20" r="2.5" fill="#D4AF37"/>
-                    <circle cx="10" cy="20" r="1.5" fill="#D4AF37"/>
-                    <circle cx="140" cy="20" r="2.5" fill="#D4AF37"/>
-                    <circle cx="150" cy="20" r="1.5" fill="#D4AF37"/>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Penanda Corner -->
-        <a href="#about" class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-center gap-2 text-brand-brown opacity-60 hover:opacity-100 transition animate-bounce z-20">
-            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Scroll</span>
-            <i data-lucide="arrow-down" class="w-6 h-6 md:w-8 md:h-8"></i>
-        </a>
-    </section>
-
-    <!-- ================= SECTION 2: ABOUT US (FULLSCREEN) ================= -->
-    <section id="about" class="h-screen snap-start flex items-center justify-center relative overflow-hidden bg-white pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full relative z-10">
-            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-center max-w-6xl mx-auto">
-                <div class="order-2 md:order-1 relative group w-full max-w-sm mx-auto md:max-w-full">
-                    <div class="absolute inset-0 bg-brand-gold/20 transform -rotate-3 rounded-2xl transition duration-500"></div>
-                    <img src="images/WhatsApp Image 2026-03-01 at 00.54.41 (1).jpeg" alt="Pembuatan Croissant" class="relative rounded-2xl shadow-xl z-10 w-full h-48 md:h-80 object-cover transition duration-500">
-                </div>
-                <div class="order-1 md:order-2 text-center md:text-left">
-                    <span class="text-brand-terracotta font-serif italic text-base md:text-lg">Tentang Kami</span>
-                    <h2 class="text-3xl md:text-5xl font-serif font-bold text-brand-dark mt-2 mb-4 md:mb-6">Cerita di Balik Lipatan</h2>
-                    <p class="text-sm md:text-base text-stone-600 leading-relaxed font-light mb-3 md:mb-4">
-                        Crosantara lahir dari cinta yang mendalam terhadap kekayaan kuliner Indonesia dan teknik memanggang pastry klasik ala Perancis. Kami percaya bahwa setiap rasa memiliki cerita, dan kami ingin menceritakannya melalui sepotong croissant.
-                    </p>
-                    <p class="text-sm md:text-base text-stone-600 leading-relaxed font-light">
-                        Dengan menggunakan rempah asli pilihan dan resep warisan leluhur, kami menghadirkan fusi rasa yang mengejutkan namun sangat akrab di lidah Anda.
-                    </p>
-                </div>
-            </div>
-        </div>
-
-        <!-- Pembatas Ukiran Elegan -->
-        <div class="absolute bottom-0 left-0 w-full z-30 pointer-events-none flex items-center justify-center translate-y-1/2">
-            <div class="absolute w-full h-[1px] bg-gradient-to-r from-transparent via-brand-gold to-transparent"></div>
-            <div class="relative flex items-center justify-center drop-shadow-sm">
-                <svg width="160" height="40" viewBox="0 0 160 40" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M80 5 L95 20 L80 35 L65 20 Z" fill="#5D4037" stroke="#D4AF37" stroke-width="2"/>
-                    <path d="M80 12 L88 20 L80 28 L72 20 Z" fill="#D4AF37"/>
-                    <path d="M30 20 C 50 20, 55 5, 70 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M30 20 C 50 20, 55 35, 70 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M130 20 C 110 20, 105 5, 90 8" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <path d="M130 20 C 110 20, 105 35, 90 32" stroke="#D4AF37" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                    <circle cx="20" cy="20" r="2.5" fill="#D4AF37"/>
-                    <circle cx="10" cy="20" r="1.5" fill="#D4AF37"/>
-                    <circle cx="140" cy="20" r="2.5" fill="#D4AF37"/>
-                    <circle cx="150" cy="20" r="1.5" fill="#D4AF37"/>
-                </svg>
-            </div>
-        </div>
-
-        <!-- Penanda Corner -->
-        <a href="#discover" class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-center gap-2 text-brand-brown opacity-60 hover:opacity-100 transition animate-bounce z-20">
-            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Scroll</span>
-            <i data-lucide="arrow-down" class="w-6 h-6 md:w-8 md:h-8"></i>
-        </a>
-    </section>
-
-    <!-- ================= SECTION 3: DISCOVER CTA (FULLSCREEN) ================= -->
-    <section id="discover" class="h-screen snap-start flex items-center justify-center relative overflow-hidden bg-brand-cream pt-16">
-        <div class="absolute inset-0 pattern-kawung opacity-20 pointer-events-none"></div>
-        <div class="relative z-10 max-w-2xl mx-auto px-4 text-center">
-            <h2 class="text-4xl md:text-6xl font-serif font-bold text-brand-dark mb-4">Eksplorasi Rasa Kami</h2>
-            <p class="text-base md:text-lg text-stone-600 mb-8 font-light">Temukan berbagai kreasi unik yang menggabungkan kelembutan croissant dengan kekayaan bumbu Nusantara yang memikat.</p>
-            <a href="menu.html" class="inline-flex items-center justify-center gap-3 px-8 py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg rounded-tr-2xl rounded-bl-2xl text-lg group">
-                <span>Lihat Menu Spesial</span>
-                <i data-lucide="arrow-right" class="w-5 h-5 group-hover:translate-x-1 transition-transform"></i>
-            </a>
         </div>
 
         <!-- Pembatas Ukiran Elegan (Menuju Footer) -->
@@ -249,10 +278,125 @@
 
         <!-- Penanda Corner -->
         <a href="#footer" class="absolute bottom-6 right-6 md:bottom-12 md:right-12 flex flex-col items-center gap-2 text-brand-brown opacity-60 hover:opacity-100 transition animate-bounce z-20">
-            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Scroll</span>
+            <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Akhir Menu</span>
             <i data-lucide="arrow-down" class="w-6 h-6 md:w-8 md:h-8"></i>
         </a>
     </section>
+
+    <!-- Quiz Modal -->
+    <div id="quiz-modal" class="fixed inset-0 z-50 hidden flex items-center justify-center">
+        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeQuiz()"></div>
+        <div class="bg-brand-cream w-full max-w-lg mx-4 shadow-2xl relative z-10 flex flex-col max-h-[85vh] overflow-hidden transform transition-all scale-95 opacity-0 border-2 border-brand-gold/50" id="quiz-content">
+            <div class="bg-brand-brown p-6 text-center relative overflow-hidden shrink-0 pattern-batik-cap">
+                <div class="relative z-10">
+                    <h3 class="text-2xl font-serif font-bold text-brand-gold">Tantangan Wawasan</h3>
+                    <div class="flex items-center justify-center gap-2 mt-2">
+                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
+                        <p class="text-white text-xs uppercase tracking-widest">Diskon 50%</p>
+                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
+                    </div>
+                </div>
+                <button onclick="closeQuiz()" class="absolute top-4 right-4 text-white/50 hover:text-white transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+
+            <div class="p-8 overflow-y-auto custom-scrollbar bg-white relative">
+                <div class="absolute inset-0 pattern-kawung opacity-20 pointer-events-none"></div>
+
+                <div id="quiz-blocked" class="hidden text-center relative z-10">
+                    <div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-6 text-stone-500 border-2 border-stone-200 border-dashed"><i data-lucide="hourglass" class="w-8 h-8"></i></div>
+                    <h4 class="text-xl font-bold text-brand-dark mb-2 font-serif">Kesempatan Habis</h4>
+                    <p class="text-stone-600 mb-6 text-sm">Kesempatan hanya datang setiap 2 hari.</p>
+                    <div class="bg-brand-cream border border-brand-brown/20 p-4 mb-6"><p class="text-[10px] text-brand-brown uppercase tracking-widest mb-1">Coba lagi dalam:</p><p id="countdown-timer" class="text-xl font-mono font-bold text-brand-terracotta">00:00:00</p></div>
+                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-800 text-white font-bold hover:bg-black transition uppercase tracking-wider text-sm">Tutup</button>
+                </div>
+
+                <div id="quiz-form-container" class="hidden relative z-10">
+                    <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-8">
+                        <div id="questions-wrapper" class="space-y-8"></div>
+                        <button type="submit" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg flex items-center justify-center gap-2 border-b-4 border-brand-dark active:border-0 active:translate-y-1"><span>Kunci Jawaban</span><i data-lucide="lock" class="w-4 h-4"></i></button>
+                    </form>
+                </div>
+
+                <div id="quiz-success" class="hidden text-center relative z-10">
+                    <div class="w-24 h-24 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold border-2 border-brand-gold animate-bounce"><i data-lucide="award" class="w-12 h-12"></i></div>
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Luar Biasa!</h3>
+                    <p class="text-stone-600 mb-8 text-sm">Jawaban benar semua.</p>
+                    <div class="bg-brand-brown p-1 rounded-lg mb-8 shadow-inner">
+                        <div class="bg-brand-cream border border-brand-brown/30 p-4 rounded relative group cursor-pointer hover:bg-white transition" onclick="copyCodeFromDisplay()">
+                            <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-1">Kode Voucher Anda</p>
+                            <p id="won-voucher-display" class="text-3xl font-mono font-bold text-brand-brown tracking-wider">NUSANTARA50</p>
+                            <div class="absolute inset-0 bg-brand-brown/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
+                                <span class="text-xs font-bold text-brand-brown bg-white px-3 py-1 shadow-sm border border-brand-brown">Salin Kode</span>
+                            </div>
+                        </div>
+                    </div>
+                    <button onclick="closeQuizAndShop()" class="w-full py-3 bg-brand-terracotta text-white font-bold hover:bg-brand-brown transition shadow-lg uppercase tracking-wider text-sm">Pesan Sekarang</button>
+                    <button onclick="closeQuiz()" class="w-full mt-3 py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition shadow-md uppercase tracking-wider text-sm">Simpan & Gunakan Nanti</button>
+                </div>
+
+                <div id="quiz-fail" class="hidden text-center relative z-10">
+                    <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-800 border-2 border-red-100"><i data-lucide="x-octagon" class="w-10 h-10"></i></div>
+                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Kurang Tepat</h3>
+                    <p class="text-stone-600 mb-8 text-sm">Jangan menyerah. Coba lagi 2 hari lagi.</p>
+                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition uppercase tracking-wider text-sm">Kembali ke Menu</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Sidebar Cart -->
+    <div id="cart-sidebar" class="fixed inset-0 z-[80] hidden">
+        <div onclick="toggleCart()" class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm transition-opacity"></div>
+        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-brand-cream shadow-2xl flex flex-col transform transition-transform duration-300 translate-x-full border-l border-brand-brown/20" id="cart-panel">
+            <div class="p-6 border-b border-brand-brown/10 flex justify-between items-center bg-white pattern-kawung">
+                <div><h2 class="text-xl font-serif font-bold text-brand-dark">Pesanan Anda</h2><p class="text-xs text-stone-500">Siap dihidangkan</p></div>
+                <button onclick="toggleCart()" class="text-stone-400 hover:text-brand-terracotta transition"><i data-lucide="x" class="w-6 h-6"></i></button>
+            </div>
+            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
+            <div class="p-6 border-t border-brand-brown/10 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
+                
+                <div id="cart-voucher-reminder" class="hidden mb-4 p-3 bg-brand-gold/10 border border-brand-gold/30 rounded text-sm text-brand-dark flex flex-col gap-2">
+                    <div class="flex items-center gap-2">
+                        <i data-lucide="ticket" class="w-4 h-4 text-brand-gold"></i>
+                        <span class="font-medium text-xs">Anda punya voucher yang bisa dipakai:</span>
+                    </div>
+                    <div id="cart-available-vouchers" class="flex gap-2 flex-wrap"></div>
+                </div>
+
+                <div class="mb-6">
+                    <div class="flex gap-2">
+                        <input type="text" id="discount-code" placeholder="Kode Voucher" class="flex-1 border-2 border-stone-200 bg-stone-50 rounded-none px-4 py-2 text-sm focus:outline-none focus:border-brand-brown uppercase font-mono tracking-wider transition">
+                        <button onclick="applyDiscount()" class="bg-brand-dark text-white px-6 py-2 text-sm font-bold hover:bg-brand-brown transition uppercase tracking-wide">Pakai</button>
+                    </div>
+                    <p id="discount-msg" class="text-xs mt-2 hidden flex items-center gap-1"></p>
+                </div>
+                <div class="space-y-3 mb-6 font-serif">
+                    <div class="flex justify-between text-stone-600 text-sm"><span>Subtotal</span><span id="cart-subtotal" class="font-sans font-medium">Rp 0</span></div>
+                    <div class="flex justify-between text-brand-terracotta hidden" id="discount-row"><span>Potongan (50%)</span><span id="discount-amount" class="font-sans font-medium">-Rp 0</span></div>
+                    <div class="flex justify-between text-2xl font-bold text-brand-dark pt-4 border-t border-brand-brown/10"><span>Total</span><span id="cart-total" class="font-sans">Rp 0</span></div>
+                </div>
+                <button onclick="checkout()" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg flex justify-center items-center gap-3 group">
+                    <span>Proses Pesanan (WA)</span>
+                    <i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
+                </button>
+            </div>
+        </div>
+    </div>
+    
+    <div id="bottom-cart-bar" class="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 hidden transform transition-transform duration-300 translate-y-full">
+        <div class="max-w-7xl mx-auto flex justify-between items-center">
+            <div class="flex flex-col"><span class="text-xs text-stone-500 font-medium font-sans" id="bottom-bar-count">0 Item</span><span class="text-lg font-bold text-brand-dark font-sans" id="bottom-bar-total">Rp 0</span></div>
+            <button onclick="toggleCart()" class="bg-brand-brown text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-brand-dark transition flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="font-sans">Lihat Pesanan</span></button>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="fixed bottom-24 right-8 z-[70] transform translate-y-48 transition-transform duration-500">
+        <div class="bg-brand-dark text-white pl-4 pr-6 py-4 shadow-2xl flex items-center gap-4 border-l-4 border-brand-gold rounded-lg">
+            <div class="bg-brand-gold/20 p-2 rounded-full"><i data-lucide="check" class="w-5 h-5 text-brand-gold"></i></div>
+            <div><h4 class="font-serif font-bold text-base text-brand-gold">Pesanan Diterima</h4><p class="text-xs text-stone-400 tracking-wide mt-0.5">Item berhasil ditambahkan.</p></div>
+        </div>
+    </div>
 
     <!-- ================= SECTION 4: FOOTER (FULLSCREEN) ================= -->
     <footer id="footer" class="h-screen snap-start flex flex-col items-center justify-center bg-brand-dark text-brand-cream/60 border-t-8 border-brand-brown relative overflow-hidden">
@@ -314,120 +458,7 @@
             <span class="text-[10px] uppercase font-bold tracking-widest hidden md:block" style="writing-mode: vertical-rl; transform: rotate(180deg);">Kembali</span>
         </a>
     </footer>
-
-    <!-- Quiz & Cart Modals (Hidden by default) -->
-    <div id="quiz-modal" class="fixed inset-0 z-[70] hidden flex items-center justify-center">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm" onclick="closeQuiz()"></div>
-        <div class="bg-brand-cream w-full max-w-lg mx-4 shadow-2xl relative z-10 flex flex-col max-h-[85vh] overflow-hidden transform transition-all scale-95 opacity-0 border-2 border-brand-gold/50" id="quiz-content">
-            <div class="bg-brand-brown p-6 text-center relative overflow-hidden shrink-0 pattern-batik-cap">
-                <div class="relative z-10">
-                    <h3 class="text-2xl font-serif font-bold text-brand-gold">Tantangan Wawasan</h3>
-                    <div class="flex items-center justify-center gap-2 mt-2">
-                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
-                        <p class="text-white text-xs uppercase tracking-widest">Diskon 50%</p>
-                        <div class="h-[1px] w-8 bg-brand-gold/50"></div>
-                    </div>
-                </div>
-                <button onclick="closeQuiz()" class="absolute top-4 right-4 text-white/50 hover:text-white transition"><i data-lucide="x" class="w-6 h-6"></i></button>
-            </div>
-
-            <div class="p-8 overflow-y-auto custom-scrollbar bg-white relative">
-                <div class="absolute inset-0 pattern-kawung opacity-20 pointer-events-none"></div>
-
-                <div id="quiz-blocked" class="hidden text-center relative z-10">
-                    <div class="w-20 h-20 bg-stone-100 rounded-full flex items-center justify-center mx-auto mb-6 text-stone-500 border-2 border-stone-200 border-dashed"><i data-lucide="hourglass" class="w-8 h-8"></i></div>
-                    <h4 class="text-xl font-bold text-brand-dark mb-2 font-serif">Kesempatan Habis</h4>
-                    <p class="text-stone-600 mb-6 text-sm">Kesempatan hanya datang setiap 2 hari.</p>
-                    <div class="bg-brand-cream border border-brand-brown/20 p-4 mb-6"><p class="text-[10px] text-brand-brown uppercase tracking-widest mb-1">Coba lagi dalam:</p><p id="countdown-timer" class="text-xl font-mono font-bold text-brand-terracotta">00:00:00</p></div>
-                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-800 text-white font-bold hover:bg-black transition uppercase tracking-wider text-sm">Tutup</button>
-                </div>
-
-                <div id="quiz-form-container" class="hidden relative z-10">
-                    <form id="quiz-form" onsubmit="submitQuiz(event)" class="space-y-8">
-                        <div id="questions-wrapper" class="space-y-8"></div>
-                        <button type="submit" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg flex items-center justify-center gap-2 border-b-4 border-brand-dark active:border-0 active:translate-y-1"><span>Kunci Jawaban</span><i data-lucide="lock" class="w-4 h-4"></i></button>
-                    </form>
-                </div>
-
-                <div id="quiz-success" class="hidden text-center relative z-10">
-                    <div class="w-24 h-24 bg-brand-gold/10 rounded-full flex items-center justify-center mx-auto mb-6 text-brand-gold border-2 border-brand-gold animate-bounce"><i data-lucide="award" class="w-12 h-12"></i></div>
-                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Luar Biasa!</h3>
-                    <p class="text-stone-600 mb-8 text-sm">Jawaban benar semua.</p>
-                    <div class="bg-brand-brown p-1 rounded-lg mb-8 shadow-inner">
-                        <div class="bg-brand-cream border border-brand-brown/30 p-4 rounded relative group cursor-pointer hover:bg-white transition" onclick="copyCodeFromDisplay()">
-                            <p class="text-[10px] text-stone-400 uppercase tracking-widest mb-1">Kode Voucher Anda</p>
-                            <p id="won-voucher-display" class="text-3xl font-mono font-bold text-brand-brown tracking-wider">NUSANTARA50</p>
-                            <div class="absolute inset-0 bg-brand-brown/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition">
-                                <span class="text-xs font-bold text-brand-brown bg-white px-3 py-1 shadow-sm border border-brand-brown">Salin Kode</span>
-                            </div>
-                        </div>
-                    </div>
-                    <button onclick="closeQuizAndShop()" class="w-full py-3 bg-brand-terracotta text-white font-bold hover:bg-brand-brown transition shadow-lg uppercase tracking-wider text-sm">Pesan Sekarang</button>
-                    <button onclick="closeQuiz()" class="w-full mt-3 py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition shadow-md uppercase tracking-wider text-sm">Simpan & Gunakan Nanti</button>
-                </div>
-
-                <div id="quiz-fail" class="hidden text-center relative z-10">
-                    <div class="w-20 h-20 bg-red-50 rounded-full flex items-center justify-center mx-auto mb-6 text-red-800 border-2 border-red-100"><i data-lucide="x-octagon" class="w-10 h-10"></i></div>
-                    <h3 class="text-2xl font-serif font-bold text-brand-dark mb-2">Kurang Tepat</h3>
-                    <p class="text-stone-600 mb-8 text-sm">Jangan menyerah. Coba lagi 2 hari lagi.</p>
-                    <button onclick="closeQuiz()" class="w-full py-3 bg-stone-200 text-stone-600 font-bold hover:bg-stone-300 transition uppercase tracking-wider text-sm">Kembali ke Menu</button>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <div id="cart-sidebar" class="fixed inset-0 z-[80] hidden">
-        <div onclick="toggleCart()" class="absolute inset-0 bg-brand-dark/60 backdrop-blur-sm transition-opacity"></div>
-        <div class="absolute right-0 top-0 h-full w-full max-w-md bg-brand-cream shadow-2xl flex flex-col transform transition-transform duration-300 translate-x-full border-l border-brand-brown/20" id="cart-panel">
-            <div class="p-6 border-b border-brand-brown/10 flex justify-between items-center bg-white pattern-kawung">
-                <div><h2 class="text-xl font-serif font-bold text-brand-dark">Pesanan Anda</h2><p class="text-xs text-stone-500">Siap dihidangkan</p></div>
-                <button onclick="toggleCart()" class="text-stone-400 hover:text-brand-terracotta transition"><i data-lucide="x" class="w-6 h-6"></i></button>
-            </div>
-            <div id="cart-items" class="flex-1 overflow-y-auto p-6 space-y-4"></div>
-            <div class="p-6 border-t border-brand-brown/10 bg-white shadow-[0_-10px_40px_rgba(0,0,0,0.05)]">
-                
-                <div id="cart-voucher-reminder" class="hidden mb-4 p-3 bg-brand-gold/10 border border-brand-gold/30 rounded text-sm text-brand-dark flex flex-col gap-2">
-                    <div class="flex items-center gap-2">
-                        <i data-lucide="ticket" class="w-4 h-4 text-brand-gold"></i>
-                        <span class="font-medium text-xs">Anda punya voucher yang bisa dipakai:</span>
-                    </div>
-                    <div id="cart-available-vouchers" class="flex gap-2 flex-wrap"></div>
-                </div>
-
-                <div class="mb-6">
-                    <div class="flex gap-2">
-                        <input type="text" id="discount-code" placeholder="Kode Voucher" class="flex-1 border-2 border-stone-200 bg-stone-50 rounded-none px-4 py-2 text-sm focus:outline-none focus:border-brand-brown uppercase font-mono tracking-wider transition">
-                        <button onclick="applyDiscount()" class="bg-brand-dark text-white px-6 py-2 text-sm font-bold hover:bg-brand-brown transition uppercase tracking-wide">Pakai</button>
-                    </div>
-                    <p id="discount-msg" class="text-xs mt-2 hidden flex items-center gap-1"></p>
-                </div>
-                <div class="space-y-3 mb-6 font-serif">
-                    <div class="flex justify-between text-stone-600 text-sm"><span>Subtotal</span><span id="cart-subtotal" class="font-sans font-medium">Rp 0</span></div>
-                    <div class="flex justify-between text-brand-terracotta hidden" id="discount-row"><span>Potongan (50%)</span><span id="discount-amount" class="font-sans font-medium">-Rp 0</span></div>
-                    <div class="flex justify-between text-2xl font-bold text-brand-dark pt-4 border-t border-brand-brown/10"><span>Total</span><span id="cart-total" class="font-sans">Rp 0</span></div>
-                </div>
-                <button onclick="checkout()" class="w-full py-4 bg-brand-brown text-white font-bold hover:bg-brand-dark transition shadow-lg flex justify-center items-center gap-3 group">
-                    <span>Proses Pesanan (WA)</span>
-                    <i data-lucide="message-circle" class="w-5 h-5 group-hover:scale-110 transition-transform"></i>
-                </button>
-            </div>
-        </div>
-    </div>
-    
-    <div id="bottom-cart-bar" class="fixed bottom-0 left-0 w-full z-50 bg-white border-t border-gray-200 shadow-[0_-4px_6px_-1px_rgba(0,0,0,0.1)] p-4 hidden transform transition-transform duration-300 translate-y-full">
-        <div class="max-w-7xl mx-auto flex justify-between items-center">
-            <div class="flex flex-col"><span class="text-xs text-stone-500 font-medium font-sans" id="bottom-bar-count">0 Item</span><span class="text-lg font-bold text-brand-dark font-sans" id="bottom-bar-total">Rp 0</span></div>
-            <button onclick="toggleCart()" class="bg-brand-brown text-white px-6 py-3 rounded-full font-bold shadow-lg hover:bg-brand-dark transition flex items-center gap-2"><i data-lucide="shopping-bag" class="w-5 h-5"></i><span class="font-sans">Lihat Pesanan</span></button>
-        </div>
-    </div>
-
-    <!-- Toast -->
-    <div id="toast" class="fixed bottom-24 right-8 z-[70] transform translate-y-48 transition-transform duration-500">
-        <div class="bg-brand-dark text-white pl-4 pr-6 py-4 shadow-2xl flex items-center gap-4 border-l-4 border-brand-gold rounded-lg">
-            <div class="bg-brand-gold/20 p-2 rounded-full"><i data-lucide="check" class="w-5 h-5 text-brand-gold"></i></div>
-            <div><h4 class="font-serif font-bold text-base text-brand-gold">Pesanan Diterima</h4><p class="text-xs text-stone-400 tracking-wide mt-0.5">Item berhasil ditambahkan.</p></div>
-        </div>
-    </div>
+    <!-- ================= BAGIAN FOOTER SELESAI ================= -->
 
     <!-- Script Terpisah -->
     <script src="js/data.js"></script>
